@@ -1,0 +1,28 @@
+{
+  "siteName": "EMJ-Consulting",
+  "tagline": "Votre partenaire de confiance pour vos voyages et vos demandes de visa",
+  "description": "EMJ-Consulting accompagne particuliers, étudiants et professionnels dans leurs démarches de voyage et d'immigration.",
+  "email": "info@emj-consulting.fr",
+  "phone": "+228 XX XX XX XX",
+  "whatsapp": "+22890000000",
+  "address": "Lomé, Togo",
+  "addressFull": "Lomé, République Togolaise",
+  "social": {
+    "facebook": "https://facebook.com/emjconsulting",
+    "instagram": "https://instagram.com/emjconsulting",
+    "tiktok": "https://tiktok.com/@emjconsulting"
+  },
+  "stats": [
+    { "value": 500, "suffix": "+", "label": "Visas obtenus" },
+    { "value": 30, "suffix": "+", "label": "Destinations" },
+    { "value": 98, "suffix": "%", "label": "Clients satisfaits" },
+    { "value": 10, "suffix": "+", "label": "Années d'expérience" }
+  ],
+  "seo": {
+    "defaultTitle": "EMJ-Consulting | Agence de voyage et visa",
+    "defaultDescription": "EMJ-Consulting accompagne particuliers, étudiants et professionnels dans leurs démarches de voyage et d'immigration depuis Lomé, Togo.",
+    "keywords": "visa, agence voyage, immigration, Togo, Lomé, visa touristique, visa étudiant"
+  },
+  "googleMapsUrl": "https://maps.google.com/?q=Lome,Togo",
+  "googleMapsEmbed": ""
+}

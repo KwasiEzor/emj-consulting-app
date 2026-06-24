@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "name": "Amina Kofi",
+    "role": "Étudiante",
+    "country": "Canada",
+    "avatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80",
+    "rating": 5,
+    "text": "Grâce à EMJ-Consulting, j'ai obtenu mon visa étudiant pour le Canada en seulement 6 semaines ! L'équipe a été d'un professionnalisme exemplaire du début à la fin.",
+    "date": "2024-03-15"
+  },
+  {
+    "id": "2",
+    "name": "Kofi Mensah",
+    "role": "Entrepreneur",
+    "country": "France",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",
+    "rating": 5,
+    "text": "Service impeccable ! Mon visa d'affaires pour la France a été obtenu en un temps record. Je recommande EMJ-Consulting à tous mes associés sans hésitation.",
+    "date": "2024-02-20"
+  },
+  {
+    "id": "3",
+    "name": "Marie Adzoa",
+    "role": "Enseignante",
+    "country": "Belgique",
+    "avatar": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80",
+    "rating": 5,
+    "text": "J'ai enfin pu rejoindre ma famille en Belgique grâce au regroupement familial géré par EMJ. Un grand merci pour votre patience et votre expertise !",
+    "date": "2024-01-10"
+  },
+  {
+    "id": "4",
+    "name": "Yao Dupont",
+    "role": "Médecin",
+    "country": "Royaume-Uni",
+    "avatar": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&q=80",
+    "rating": 5,
+    "text": "EMJ-Consulting m'a accompagné dans ma démarche de visa qualifié pour le Royaume-Uni. Processus transparent, communication excellente. 10/10 !",
+    "date": "2024-04-05"
+  },
+  {
+    "id": "5",
+    "name": "Fatou Diallo",
+    "role": "Étudiante Master",
+    "country": "Allemagne",
+    "avatar": "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=200&q=80",
+    "rating": 5,
+    "text": "Université de Berlin obtenue, visa en main ! EMJ m'a guidée à chaque étape. Leur connaissance du système allemand est vraiment impressionnante.",
+    "date": "2024-05-12"
+  }
+]
