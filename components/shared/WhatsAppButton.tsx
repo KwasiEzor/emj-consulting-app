@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { FaWhatsapp } from "@react-icons/all-files/fa/FaWhatsapp";
 
 export default function WhatsAppButton() {
-  const phone = "22890000000";
+  const phone = "14389515445";
   const message = encodeURIComponent("Bonjour EMJ-Consulting, je souhaite des informations sur vos services.");
 
   return (

@@ -85,11 +85,11 @@ export default function Navbar() {
             {/* Actions */}
             <div className="hidden lg:flex items-center gap-3">
               <a
-                href="tel:+22890000000"
+                href="tel:+22893474963"
                 className="flex items-center gap-2 text-white/70 hover:text-[#D4AF37] transition-colors text-sm"
               >
                 <Phone className="w-4 h-4" />
-                <span>+228 XX XX XX XX</span>
+                <span>+228 93 47 49 63</span>
               </a>
               {mounted && (
                 <button

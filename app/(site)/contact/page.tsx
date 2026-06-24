@@ -78,7 +78,7 @@ export default function ContactPage() {
                   {[
                     { icon: MapPin, label: "Adresse", value: "Lomé, République Togolaise" },
                     { icon: Mail, label: "Email", value: "info@emj-consulting.fr", href: "mailto:info@emj-consulting.fr" },
-                    { icon: Phone, label: "Téléphone", value: "+228 XX XX XX XX", href: "tel:+22890000000" },
+                    { icon: Phone, label: "Téléphone", value: "+228 93 47 49 63", href: "tel:+22893474963" },
                   ].map((item) => (
                     <div key={item.label} className="flex items-start gap-4 p-4 rounded-xl border border-gray-100 dark:border-white/10">
                       <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center shrink-0">
@@ -104,7 +104,7 @@ export default function ContactPage() {
                 <h3 className="font-semibold text-[#0B1F3A] dark:text-white mb-4">Réseaux sociaux</h3>
                 <div className="flex gap-3">
                   {[
-                    { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/22890000000", color: "bg-[#25D366]/10 text-[#25D366]" },
+                    { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/14389515445", color: "bg-[#25D366]/10 text-[#25D366]" },
                     { icon: FaFacebookF, label: "Facebook", href: "#", color: "bg-blue-500/10 text-blue-500" },
                     { icon: FaInstagram, label: "Instagram", href: "#", color: "bg-pink-500/10 text-pink-500" },
                   ].map((s) => (
@@ -149,7 +149,7 @@ export default function ContactPage() {
                       {[
                         { name: "name", label: "Nom complet", type: "text", placeholder: "Jean Dupont" },
                         { name: "email", label: "Email", type: "email", placeholder: "jean@exemple.com" },
-                        { name: "phone", label: "Téléphone", type: "tel", placeholder: "+228 XX XX XX XX" },
+                        { name: "phone", label: "Téléphone", type: "tel", placeholder: "+228 93 47 49 63" },
                         { name: "country", label: "Pays de destination", type: "text", placeholder: "France, Canada..." },
                       ].map((field) => (
                         <div key={field.name}>

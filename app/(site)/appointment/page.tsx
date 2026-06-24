@@ -202,7 +202,7 @@ export default function AppointmentPage() {
                   {[
                     { name: "name", label: "Nom complet", icon: User, type: "text", placeholder: "Jean Dupont" },
                     { name: "email", label: "Email", icon: Mail, type: "email", placeholder: "jean@exemple.com" },
-                    { name: "phone", label: "Téléphone", icon: Phone, type: "tel", placeholder: "+228 XX XX XX XX" },
+                    { name: "phone", label: "Téléphone", icon: Phone, type: "tel", placeholder: "+228 93 47 49 63" },
                   ].map((field) => (
                     <div key={field.name}>
                       <label className="block text-sm font-medium text-gray-600 dark:text-white/60 mb-2">
