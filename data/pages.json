@@ -1,0 +1,60 @@
+{
+  "home": {
+    "badge": "Cabinet spécialisé en visa & immigration — Lomé, Togo",
+    "title": "L'Expertise pour réaliser vos Rêves",
+    "subtitle": "Visa touristique, étudiant ou professionnel — nous gérons vos dossiers avec rigueur et vous accompagnons jusqu'à l'obtention.",
+    "ctaPrimary": "Nos services",
+    "ctaSecondary": "Prendre rendez-vous",
+    "stats": [
+      {
+        "value": 500,
+        "suffix": "+",
+        "label": "Visas obtenus"
+      },
+      {
+        "value": 30,
+        "suffix": "+",
+        "label": "Destinations"
+      },
+      {
+        "value": 98,
+        "suffix": "%",
+        "label": "Clients satisfaits"
+      },
+      {
+        "value": 10,
+        "suffix": "+",
+        "label": "Années d'expérience"
+      }
+    ]
+  },
+  "about": {
+    "heroTitle": "À propos d'EMJ-Consulting",
+    "heroSubtitle": "Une décennie d'expertise au service de vos projets de voyage et d'immigration.",
+    "founderName": "EMLOR Joël",
+    "founderRole": "Fondateur & Directeur",
+    "founderBio": "Avec plus de 10 ans d'expérience dans le domaine du voyage et de l'immigration, EMLOR Joël a fondé EMJ-Consulting avec la conviction que chaque projet mérite un accompagnement professionnel, rigoureux et humain.",
+    "missionTitle": "Notre mission",
+    "missionText": "Offrir à chaque client un accompagnement personnalisé et professionnel dans ses démarches de visa et d'immigration, avec transparence, efficacité et engagement total.",
+    "visionTitle": "Notre vision",
+    "visionText": "Faire d'EMJ-Consulting la référence en Afrique de l'Ouest pour les démarches de visa et l'accompagnement au voyage international."
+  },
+  "services": {
+    "heroTitle": "Nos Services",
+    "heroSubtitle": "Des solutions complètes pour tous vos besoins en visa et démarches d'immigration.",
+    "ctaTitle": "Besoin d'un accompagnement personnalisé ?",
+    "ctaSubtitle": "Nos experts analysent votre situation et vous proposent la meilleure stratégie."
+  },
+  "destinations": {
+    "heroTitle": "Nos Destinations",
+    "heroSubtitle": "Explorez les pays pour lesquels nous gérons vos visas et démarches administratives.",
+    "ctaTitle": "Votre destination n'est pas listée ?",
+    "ctaSubtitle": "Contactez-nous — nous couvrons bien plus que ce qui est affiché ici."
+  },
+  "contact": {
+    "heroTitle": "Contactez-nous",
+    "heroSubtitle": "Notre équipe répond dans les 24h. Remplissez le formulaire ou contactez-nous directement.",
+    "formTitle": "Envoyer un message",
+    "infoTitle": "Informations de contact"
+  }
+}
