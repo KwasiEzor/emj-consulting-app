@@ -3,7 +3,10 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { Mail, Phone, MapPin, MessageCircle, Send, CheckCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import { FaWhatsapp } from "@react-icons/all-files/fa/FaWhatsapp";
+import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
+import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 
 const LeafletMap = dynamic(() => import("@/components/map/LeafletMap"), {
   ssr: false,
@@ -101,9 +104,9 @@ export default function ContactPage() {
                 <h3 className="font-semibold text-[#0B1F3A] dark:text-white mb-4">Réseaux sociaux</h3>
                 <div className="flex gap-3">
                   {[
-                    { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/22890000000", color: "bg-[#25D366]/10 text-[#25D366]" },
-                    { icon: Mail, label: "Facebook", href: "#", color: "bg-blue-500/10 text-blue-500" },
-                    { icon: Phone, label: "Instagram", href: "#", color: "bg-pink-500/10 text-pink-500" },
+                    { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/22890000000", color: "bg-[#25D366]/10 text-[#25D366]" },
+                    { icon: FaFacebookF, label: "Facebook", href: "#", color: "bg-blue-500/10 text-blue-500" },
+                    { icon: FaInstagram, label: "Instagram", href: "#", color: "bg-pink-500/10 text-pink-500" },
                   ].map((s) => (
                     <a
                       key={s.label}

@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Globe, Mail, Phone, MapPin, Send } from "lucide-react";
+import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
+import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
+import { SiTiktok } from "@react-icons/all-files/si/SiTiktok";
 
 const footerLinks = {
   services: [
@@ -72,14 +75,14 @@ export default function Footer() {
               Votre partenaire de confiance pour vos voyages et demandes de visa depuis Lomé, Togo.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="w-9 h-9 rounded-lg glass flex items-center justify-center text-white/60 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-colors text-xs font-bold">
-                FB
+              <a href="#" aria-label="Facebook" className="w-9 h-9 rounded-lg glass flex items-center justify-center text-white/60 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-colors">
+                <FaFacebookF className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-lg glass flex items-center justify-center text-white/60 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-colors text-xs font-bold">
-                IG
+              <a href="#" aria-label="Instagram" className="w-9 h-9 rounded-lg glass flex items-center justify-center text-white/60 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-colors">
+                <FaInstagram className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-lg glass flex items-center justify-center text-white/60 hover:text-[#D4AF37] transition-colors text-xs font-bold">
-                TK
+              <a href="#" aria-label="TikTok" className="w-9 h-9 rounded-lg glass flex items-center justify-center text-white/60 hover:text-[#D4AF37] transition-colors">
+                <SiTiktok className="w-4 h-4" />
               </a>
             </div>
           </div>

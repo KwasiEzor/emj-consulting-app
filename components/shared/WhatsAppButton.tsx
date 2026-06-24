@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { FaWhatsapp } from "@react-icons/all-files/fa/FaWhatsapp";
 
 export default function WhatsAppButton() {
   const phone = "22890000000";
@@ -20,7 +20,7 @@ export default function WhatsAppButton() {
       className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] shadow-xl shadow-[#25D366]/30 flex items-center justify-center text-white"
       aria-label="Contacter via WhatsApp"
     >
-      <MessageCircle className="w-7 h-7 fill-white" />
+      <FaWhatsapp className="w-7 h-7" />
       <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[9px] font-bold">1</span>
     </motion.a>
   );

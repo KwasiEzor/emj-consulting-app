@@ -2,6 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { Save, Globe, Mail, Phone, MapPin } from "lucide-react";
+import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
+import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
+import { SiTiktok } from "@react-icons/all-files/si/SiTiktok";
+import { FaWhatsapp } from "@react-icons/all-files/fa/FaWhatsapp";
 import type { SiteSettings } from "@/lib/types";
 
 export default function AdminSettingsPage() {
@@ -59,7 +63,7 @@ export default function AdminSettingsPage() {
             <Field label="Nom du site" icon={Globe} field="siteName" />
             <Field label="Email" icon={Mail} field="email" type="email" />
             <Field label="Téléphone" icon={Phone} field="phone" />
-            <Field label="WhatsApp" icon={Phone} field="whatsapp" />
+            <Field label="WhatsApp" icon={FaWhatsapp} field="whatsapp" />
             <Field label="Adresse courte" icon={MapPin} field="address" />
             <Field label="Adresse complète" icon={MapPin} field="addressFull" />
           </div>
@@ -70,9 +74,9 @@ export default function AdminSettingsPage() {
           <h2 className="font-semibold text-gray-900 dark:text-white mb-5">Réseaux sociaux</h2>
           <div className="space-y-4">
             {[
-              { label: "Facebook", icon: Globe, key: "facebook" },
-              { label: "Instagram", icon: Globe, key: "instagram" },
-              { label: "TikTok", icon: Globe, key: "tiktok" },
+              { label: "Facebook", icon: FaFacebookF, key: "facebook" },
+              { label: "Instagram", icon: FaInstagram, key: "instagram" },
+              { label: "TikTok", icon: SiTiktok, key: "tiktok" },
             ].map((s) => (
               <div key={s.key}>
                 <label className="block text-sm font-medium text-gray-600 dark:text-white/60 mb-1.5 flex items-center gap-1.5">
