@@ -1,12 +1,12 @@
 import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const { userId } = await auth();
 
+  // Sign-in page: render without sidebar
   if (!userId) {
-    redirect("/admin/sign-in");
+    return <>{children}</>;
   }
 
   return (
