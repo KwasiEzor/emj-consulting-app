@@ -41,7 +41,7 @@ export default function WhyUsSection() {
     <section className="py-24 bg-white dark:bg-[#050e1c] relative overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0 opacity-5">
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/hero/airplane-sky.jpg"
           alt=""
           className="w-full h-full object-cover"
@@ -90,7 +90,7 @@ export default function WhyUsSection() {
               transition={{ delay: 0.3 }}
               className="relative rounded-2xl overflow-hidden h-64"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/team/emlor-joel.jpg"
                 alt="Équipe EMJ-Consulting"
                 className="w-full h-full object-cover"

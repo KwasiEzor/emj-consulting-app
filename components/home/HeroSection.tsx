@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calendar, TrendingUp, Globe2, Star, Clock } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 
@@ -21,8 +22,7 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
       ([entry]) => {
         if (entry.isIntersecting) {
           let start = 0;
-          const duration = 2000;
-          const step = Math.ceil(target / (duration / 16));
+          const step = Math.ceil(target / 80);
           const timer = setInterval(() => {
             start += step;
             if (start >= target) {
@@ -31,7 +31,7 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
             } else {
               setCount(start);
             }
-          }, 16);
+          }, 20);
           observer.disconnect();
         }
       },
@@ -47,48 +47,27 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Cinematic background */}
+      {/* Background — priority load, no JS animation */}
       <div className="absolute inset-0">
-        <motion.img
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 8, ease: "easeOut" }}
+        <Image
           src="/images/hero/airplane-sky.jpg"
           alt="Avion en vol"
-          className="w-full h-full object-cover"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0B1F3A]/80 via-[#0B1F3A]/60 to-[#0B1F3A]/90" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B1F3A]/60 to-transparent" />
       </div>
 
-      {/* Animated particles */}
-      {[...Array(20)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-[#D4AF37]/30"
-          initial={{
-            x: Math.random() * (typeof window !== "undefined" ? window.innerWidth : 1200),
-            y: Math.random() * (typeof window !== "undefined" ? window.innerHeight : 800),
-          }}
-          animate={{
-            y: [null, -30, 0],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 3,
-            repeat: Infinity,
-            delay: Math.random() * 3,
-          }}
-        />
-      ))}
-
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
         {/* Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
+          transition={{ duration: 0.6 }}
           className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-8 text-[#D4AF37] text-sm font-medium"
         >
           <Globe2 className="w-4 h-4" />
@@ -97,9 +76,9 @@ export default function HeroSection() {
 
         {/* Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
+          transition={{ delay: 0.15, duration: 0.7 }}
           className="font-poppins font-bold text-4xl sm:text-5xl lg:text-7xl text-white leading-tight mb-6 max-w-5xl mx-auto"
         >
           Votre partenaire de confiance pour vos{" "}
@@ -109,9 +88,9 @@ export default function HeroSection() {
 
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.7 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
           className="text-white/70 text-lg sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed"
         >
           EMJ-Consulting accompagne particuliers, étudiants et professionnels dans
@@ -120,9 +99,9 @@ export default function HeroSection() {
 
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.7 }}
+          transition={{ delay: 0.45, duration: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
         >
           <Link
@@ -143,17 +122,14 @@ export default function HeroSection() {
 
         {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.8 }}
+          transition={{ delay: 0.6, duration: 0.7 }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto"
         >
-          {stats.map((stat, i) => (
-            <motion.div
+          {stats.map((stat) => (
+            <div
               key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.2 + i * 0.1 }}
               className="glass rounded-2xl p-5 text-center hover:border-[#D4AF37]/30 transition-colors group"
             >
               <stat.icon className="w-5 h-5 text-[#D4AF37] mx-auto mb-2 group-hover:scale-110 transition-transform" />
@@ -161,7 +137,7 @@ export default function HeroSection() {
                 <CountUp target={stat.value} suffix={stat.suffix} />
               </div>
               <div className="text-white/50 text-xs mt-1">{stat.label}</div>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>
@@ -170,7 +146,7 @@ export default function HeroSection() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
+        transition={{ delay: 1.2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <span className="text-white/40 text-xs tracking-widest uppercase">Scroll</span>

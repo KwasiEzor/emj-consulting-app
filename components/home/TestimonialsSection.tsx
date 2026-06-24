@@ -56,7 +56,7 @@ export default function TestimonialsSection({ testimonials }: { testimonials: Te
               </p>
 
               <div className="flex items-center justify-center gap-4">
-                <img
+                <img loading="lazy" decoding="async"
                   src={testimonials[current].avatar}
                   alt={testimonials[current].name}
                   className="w-14 h-14 rounded-full object-cover border-2 border-[#D4AF37]/40"
