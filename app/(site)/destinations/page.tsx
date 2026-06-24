@@ -22,7 +22,7 @@ export default function DestinationsPage() {
       {/* Hero */}
       <section className="relative py-32 bg-[#0B1F3A] overflow-hidden">
         <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1569530510519-3cd40a86d7ff?w=1920&q=70" alt="" className="w-full h-full object-cover opacity-20" />
+          <img src="/images/hero/world-travel.jpg" alt="" className="w-full h-full object-cover opacity-20" />
           <div className="absolute inset-0 navy-gradient opacity-85" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">

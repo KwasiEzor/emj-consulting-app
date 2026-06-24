@@ -26,7 +26,7 @@ export default function AboutPage() {
       <section className="relative py-32 bg-[#0B1F3A] overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&q=80"
+            src="/images/hero/business-handshake.jpg"
             alt=""
             className="w-full h-full object-cover opacity-20"
           />
@@ -61,7 +61,7 @@ export default function AboutPage() {
               viewport={{ once: true }}
             >
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
+                src="/images/team/emlor-joel.jpg"
                 alt="EMLOR Joël"
                 className="w-full rounded-3xl object-cover aspect-[4/5]"
               />

@@ -42,7 +42,7 @@ export default function WhyUsSection() {
       {/* Background image */}
       <div className="absolute inset-0 opacity-5">
         <img
-          src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=50"
+          src="/images/hero/airplane-sky.jpg"
           alt=""
           className="w-full h-full object-cover"
         />
@@ -91,7 +91,7 @@ export default function WhyUsSection() {
               className="relative rounded-2xl overflow-hidden h-64"
             >
               <img
-                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80"
+                src="/images/team/emlor-joel.jpg"
                 alt="Équipe EMJ-Consulting"
                 className="w-full h-full object-cover"
               />

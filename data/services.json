@@ -7,7 +7,7 @@
     "description": "Notre équipe vous guide à travers toutes les étapes pour obtenir votre visa touristique. Nous préparons votre dossier avec soin pour maximiser vos chances de succès.",
     "advantages": ["Dossier complet préparé", "Suivi en temps réel", "Taux de succès 98%", "Délais optimisés"],
     "process": ["Consultation initiale", "Collecte des documents", "Préparation du dossier", "Soumission et suivi", "Obtention du visa"],
-    "image": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80",
+    "image": "/images/services/visa-touriste.jpg",
     "featured": true
   },
   {
@@ -18,7 +18,7 @@
     "description": "Nous accompagnons les étudiants dans leur demande de visa étudiant pour les meilleures universités mondiales. De la lettre d'admission à l'obtention du visa.",
     "advantages": ["Accompagnement personnalisé", "Conseils sur les universités", "Préparation entretien", "Support continu"],
     "process": ["Choix de l'université", "Préparation admission", "Dossier visa", "Entretien consulaire", "Départ étudiant"],
-    "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
+    "image": "/images/services/visa-etudiant.jpg",
     "featured": true
   },
   {
@@ -29,7 +29,7 @@
     "description": "Pour les professionnels et entrepreneurs, nous facilitons l'obtention de visas d'affaires pour tous vos déplacements professionnels.",
     "advantages": ["Traitement prioritaire", "Visa multi-entrées", "Support 24/7", "Expertise B2B"],
     "process": ["Brief professionnel", "Lettre d'invitation", "Dossier complet", "Soumission express", "Visa obtenu"],
-    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+    "image": "/images/services/visa-affaires.jpg",
     "featured": true
   },
   {
@@ -40,7 +40,7 @@
     "description": "Nous aidons les familles séparées à se réunir grâce à notre expertise en regroupement familial et immigration.",
     "advantages": ["Expertise juridique", "Suivi personnalisé", "Documentation complète", "Délais réduits"],
     "process": ["Évaluation éligibilité", "Rassemblement documents", "Dépôt dossier", "Suivi préfecture", "Réunification"],
-    "image": "https://images.unsplash.com/photo-1511895426328-dc8714191011?w=800&q=80",
+    "image": "/images/services/regroupement-familial.jpg",
     "featured": false
   },
   {
@@ -51,7 +51,7 @@
     "description": "Translation de documents, légalisation, apostille — nous gérons toute la paperasse administrative pour vous.",
     "advantages": ["Traduction certifiée", "Légalisation rapide", "Apostille", "Service complet"],
     "process": ["Analyse documents", "Traduction officielle", "Légalisation", "Apostille si nécessaire", "Livraison"],
-    "image": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80",
+    "image": "/images/services/assistance-administrative.jpg",
     "featured": false
   },
   {
@@ -62,7 +62,7 @@
     "description": "Nous négocions pour vous les meilleurs tarifs dans les hôtels de luxe et établissements de qualité partout dans le monde.",
     "advantages": ["Meilleurs tarifs", "Hôtels sélectionnés", "Annulation flexible", "Support voyage"],
     "process": ["Choix destination", "Sélection hôtel", "Réservation", "Confirmation", "Check-in facilité"],
-    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+    "image": "/images/services/reservation-hotel.jpg",
     "featured": false
   },
   {
@@ -73,7 +73,7 @@
     "description": "Réservation de billets d'avion aux meilleurs prix avec accompagnement pour les formalités d'enregistrement.",
     "advantages": ["Prix compétitifs", "Toutes compagnies", "Flexibilité dates", "Bagage inclus"],
     "process": ["Choix destination", "Comparaison vols", "Réservation", "Émission billet", "Support embarquement"],
-    "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80",
+    "image": "/images/services/billets-avion.jpg",
     "featured": false
   },
   {
@@ -84,7 +84,7 @@
     "description": "Couverture complète pour vos voyages : santé, annulation, bagages, rapatriement. Votre sécurité est notre priorité.",
     "advantages": ["Couverture mondiale", "Remboursement rapide", "Assistance 24/7", "Tarifs préférentiels"],
     "process": ["Évaluation besoins", "Choix formule", "Souscription", "Attestation immédiate", "Assistance si besoin"],
-    "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
+    "image": "/images/services/assurance-voyage.jpg",
     "featured": false
   },
   {
@@ -95,7 +95,7 @@
     "description": "Nos conseillers experts vous guident dans votre projet d'immigration : résidence permanente, naturalisation, permis de travail.",
     "advantages": ["Expertise juridique", "Conseils stratégiques", "Veille réglementaire", "Accompagnement global"],
     "process": ["Audit situation", "Stratégie immigration", "Constitution dossier", "Dépôt demande", "Obtention statut"],
-    "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
+    "image": "/images/services/conseils-immigration.jpg",
     "featured": false
   }
 ]

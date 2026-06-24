@@ -53,7 +53,7 @@ export default function HeroSection() {
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 8, ease: "easeOut" }}
-          src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=85"
+          src="/images/hero/airplane-sky.jpg"
           alt="Avion en vol"
           className="w-full h-full object-cover"
         />

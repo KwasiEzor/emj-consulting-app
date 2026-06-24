@@ -87,7 +87,7 @@ export default function AppointmentPage() {
       {/* Hero */}
       <section className="relative py-32 bg-[#0B1F3A] overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=70" alt="" className="w-full h-full object-cover" />
+          <img src="/images/hero/appointment-bg.jpg" alt="" className="w-full h-full object-cover" />
         </div>
         <div className="absolute inset-0 navy-gradient opacity-85" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">

@@ -10,7 +10,7 @@ export default function CtaSection() {
       {/* Background */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1569530510519-3cd40a86d7ff?w=1920&q=70"
+          src="/images/hero/world-travel.jpg"
           alt=""
           className="w-full h-full object-cover opacity-20"
         />
