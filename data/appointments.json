@@ -1,0 +1,14 @@
+[
+  {
+    "id": "appt-1782317153916-7ccs9",
+    "name": "Marie Dupont",
+    "email": "kwasiezor.dev@gmail.com",
+    "phone": "+228 90 11 22 33",
+    "service": "Visa Étudiant",
+    "date": "2026-07-15",
+    "time": "10:00",
+    "notes": "Université en France",
+    "status": "pending",
+    "createdAt": "2026-06-24T16:05:53.916Z"
+  }
+]
