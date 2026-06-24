@@ -2,7 +2,20 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { Mail, Phone, MapPin, MessageCircle, Send, CheckCircle } from "lucide-react";
+
+const LeafletMap = dynamic(() => import("@/components/map/LeafletMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center bg-[#0B1F3A]/5 dark:bg-white/5">
+      <div className="text-center text-gray-400">
+        <MapPin className="w-8 h-8 mx-auto mb-2 animate-pulse text-[#D4AF37]" />
+        <p className="text-sm">Chargement de la carte...</p>
+      </div>
+    </div>
+  ),
+});
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", country: "", message: "" });
@@ -106,13 +119,9 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Map placeholder */}
-              <div className="rounded-2xl overflow-hidden h-56 bg-[#0B1F3A]/10 dark:bg-white/5 border border-gray-100 dark:border-white/10 flex items-center justify-center">
-                <div className="text-center text-gray-400 dark:text-white/30">
-                  <MapPin className="w-8 h-8 mx-auto mb-2" />
-                  <p className="text-sm">Lomé, Togo</p>
-                  <p className="text-xs mt-1">Google Maps à configurer</p>
-                </div>
+              {/* Interactive map */}
+              <div className="rounded-2xl overflow-hidden h-64 border border-gray-100 dark:border-white/10">
+                <LeafletMap lat={6.1375} lng={1.2123} zoom={14} />
               </div>
             </div>
 
