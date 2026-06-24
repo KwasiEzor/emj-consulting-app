@@ -49,8 +49,65 @@ export interface BlogPost {
   featured: boolean;
 }
 
+export type AppointmentStatus = "pending" | "confirmed" | "cancelled";
+
+export interface Appointment {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  date: string;
+  time: string;
+  notes: string;
+  status: AppointmentStatus;
+  createdAt: string;
+}
+
+export interface PageContent {
+  home: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    stats: Array<{ value: number; suffix: string; label: string }>;
+  };
+  about: {
+    heroTitle: string;
+    heroSubtitle: string;
+    founderName: string;
+    founderRole: string;
+    founderBio: string;
+    founderImage: string;
+    missionTitle: string;
+    missionText: string;
+    visionTitle: string;
+    visionText: string;
+  };
+  services: {
+    heroTitle: string;
+    heroSubtitle: string;
+    ctaTitle: string;
+    ctaSubtitle: string;
+  };
+  destinations: {
+    heroTitle: string;
+    heroSubtitle: string;
+    ctaTitle: string;
+    ctaSubtitle: string;
+  };
+  contact: {
+    heroTitle: string;
+    heroSubtitle: string;
+    formTitle: string;
+    infoTitle: string;
+  };
+}
+
 export interface SiteSettings {
   siteName: string;
+  logo: string;
   tagline: string;
   description: string;
   email: string;
@@ -68,6 +125,7 @@ export interface SiteSettings {
     defaultTitle: string;
     defaultDescription: string;
     keywords: string;
+    ogImage: string;
   };
   googleMapsUrl: string;
   googleMapsEmbed: string;

@@ -1,12 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { FaWhatsapp } from "@react-icons/all-files/fa/FaWhatsapp";
 import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
+import type { PageContent } from "@/lib/types";
+import pagesData from "@/data/pages.json";
 
 const LeafletMap = dynamic(() => import("@/components/map/LeafletMap"), {
   ssr: false,
@@ -21,6 +23,10 @@ const LeafletMap = dynamic(() => import("@/components/map/LeafletMap"), {
 });
 
 export default function ContactPage() {
+  const [pg, setPg] = useState<PageContent["contact"]>(pagesData.contact as PageContent["contact"]);
+  useEffect(() => {
+    fetch("/api/pages").then(r => r.json()).then(d => setPg(d.contact));
+  }, []);
   const [form, setForm] = useState({ name: "", email: "", phone: "", country: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -59,10 +65,10 @@ export default function ContactPage() {
         <div className="absolute inset-0 navy-gradient opacity-85" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="font-poppins font-bold text-4xl sm:text-6xl text-white mb-6">
-            <span className="gold-text">Contactez</span>-nous
+            {pg.heroTitle}
           </motion.h1>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="text-white/70 text-xl">
-            Notre équipe vous répond dans les 24 heures.
+            {pg.heroSubtitle}
           </motion.p>
         </div>
       </section>
@@ -73,7 +79,7 @@ export default function ContactPage() {
             {/* Info */}
             <div className="lg:col-span-2 space-y-8">
               <div>
-                <h2 className="font-poppins font-bold text-2xl text-[#0B1F3A] dark:text-white mb-6">Informations de contact</h2>
+                <h2 className="font-poppins font-bold text-2xl text-[#0B1F3A] dark:text-white mb-6">{pg.infoTitle}</h2>
                 <div className="space-y-5">
                   {[
                     { icon: MapPin, label: "Adresse", value: "Lomé, République Togolaise" },
@@ -131,7 +137,7 @@ export default function ContactPage() {
             {/* Form */}
             <div className="lg:col-span-3">
               <div className="rounded-3xl border border-gray-100 dark:border-white/10 p-8">
-                <h2 className="font-poppins font-bold text-2xl text-[#0B1F3A] dark:text-white mb-8">Envoyez-nous un message</h2>
+                <h2 className="font-poppins font-bold text-2xl text-[#0B1F3A] dark:text-white mb-8">{pg.formTitle}</h2>
 
                 {success ? (
                   <motion.div

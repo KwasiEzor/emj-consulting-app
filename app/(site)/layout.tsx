@@ -3,6 +3,7 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import BackToTop from "@/components/shared/BackToTop";
 import LoadingScreen from "@/components/shared/LoadingScreen";
+import Analytics from "@/components/shared/Analytics";
 
 export default function SiteLayout({
   children,
@@ -11,6 +12,7 @@ export default function SiteLayout({
 }) {
   return (
     <>
+      <Analytics />
       <LoadingScreen />
       <Navbar />
       <main>{children}</main>

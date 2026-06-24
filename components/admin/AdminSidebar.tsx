@@ -4,11 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 import {
-  LayoutDashboard, FileText, Star, MapPin, Briefcase, Settings, Globe, ExternalLink,
+  LayoutDashboard, FileText, Star, MapPin, Briefcase, Settings, Globe, ExternalLink, LayoutTemplate, CalendarCheck, BarChart2,
 } from "lucide-react";
 
 const navItems = [
   { href: "/admin", icon: LayoutDashboard, label: "Tableau de bord" },
+  { href: "/admin/analytics", icon: BarChart2, label: "Analytiques" },
+  { href: "/admin/appointments", icon: CalendarCheck, label: "Rendez-vous" },
+  { href: "/admin/pages", icon: LayoutTemplate, label: "Pages" },
   { href: "/admin/blog", icon: FileText, label: "Articles" },
   { href: "/admin/testimonials", icon: Star, label: "Témoignages" },
   { href: "/admin/destinations", icon: MapPin, label: "Destinations" },

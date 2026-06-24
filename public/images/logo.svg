@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" fill="white">
+  <!-- Globe base circle -->
+  <circle cx="220" cy="260" r="160"/>
+
+  <!-- Continent cutouts as dark negative space -->
+  <!-- North America -->
+  <path d="M100 210 L118 198 L142 193 L160 205 L172 224 L166 245 L148 262 L130 268 L112 256 L97 238 Z" fill="#222"/>
+  <!-- South America -->
+  <path d="M138 288 L162 282 L180 295 L184 322 L174 352 L157 364 L138 360 L125 340 L122 314 Z" fill="#222"/>
+  <!-- Europe -->
+  <path d="M210 185 L234 178 L252 188 L258 207 L248 224 L232 230 L214 222 L202 205 Z" fill="#222"/>
+  <!-- Africa -->
+  <path d="M215 242 L242 235 L262 250 L266 283 L256 316 L238 330 L218 328 L200 308 L196 278 L202 255 Z" fill="#222"/>
+  <!-- Asia -->
+  <path d="M268 182 L308 174 L334 186 L342 206 L334 228 L308 236 L274 232 L255 214 L258 196 Z" fill="#222"/>
+  <path d="M280 248 L320 240 L348 255 L352 280 L340 305 L312 314 L280 308 L260 288 L258 268 Z" fill="#222"/>
+
+  <!-- Globe latitude line (horizontal ellipse) -->
+  <ellipse cx="220" cy="260" rx="160" ry="32" fill="none" stroke="#222" stroke-width="4"/>
+  <!-- Vertical longitude arcs -->
+  <path d="M220 100 Q288 185 220 420" fill="none" stroke="#222" stroke-width="4"/>
+  <path d="M220 100 Q152 185 220 420" fill="none" stroke="#222" stroke-width="4"/>
+
+  <!-- Bottom swoosh arc — large, going under the globe -->
+  <path d="M38 318 Q80 420 220 436 Q360 452 452 370 Q486 344 490 312"
+        fill="none" stroke="white" stroke-width="26" stroke-linecap="round"/>
+
+  <!-- Top swoosh arc — large, going over the globe -->
+  <path d="M18 230 Q52 140 168 108 Q284 76 390 100 Q440 112 470 148"
+        fill="none" stroke="white" stroke-width="26" stroke-linecap="round"/>
+
+  <!-- Airplane — upper right, angled -->
+  <g transform="translate(400 105) rotate(-38)">
+    <!-- Fuselage -->
+    <ellipse cx="0" cy="0" rx="62" ry="14"/>
+    <!-- Nose -->
+    <path d="M62 -6 Q92 0 102 0 Q92 0 62 6 Z"/>
+    <!-- Main wings -->
+    <path d="M5 -4 L-22 -58 L-40 -58 L-16 -4 Z"/>
+    <path d="M5 4 L-22 58 L-40 58 L-16 4 Z"/>
+    <!-- Tail horizontal fins -->
+    <path d="M-48 -4 L-64 -30 L-76 -30 L-60 -4 Z"/>
+    <path d="M-48 4 L-64 30 L-76 30 L-60 4 Z"/>
+    <!-- Vertical tail -->
+    <path d="M-50 -2 L-68 -28 L-60 -28 L-44 -2 Z"/>
+  </g>
+</svg>

@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Award, Target, Heart, Globe2, Users, TrendingUp, CheckCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import type { PageContent } from "@/lib/types";
+import pagesData from "@/data/pages.json";
 
 const timeline = [
   { year: "2014", title: "Fondation", desc: "EMLOR Joël crée EMJ-Consulting à Lomé avec une vision claire : rendre l'accès au voyage international accessible à tous." },
@@ -20,6 +23,11 @@ const values = [
 ];
 
 export default function AboutPage() {
+  const [pg, setPg] = useState<PageContent["about"]>(pagesData.about as PageContent["about"]);
+  useEffect(() => {
+    fetch("/api/pages").then(r => r.json()).then(d => setPg(d.about));
+  }, []);
+  const about = pg;
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -38,7 +46,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             className="font-poppins font-bold text-4xl sm:text-6xl text-white mb-6"
           >
-            À propos d&apos;<span className="gold-text">EMJ-Consulting</span>
+            {about.heroTitle}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -46,7 +54,7 @@ export default function AboutPage() {
             transition={{ delay: 0.2 }}
             className="text-white/70 text-xl max-w-2xl mx-auto"
           >
-            Une décennie d&apos;expertise au service de vos projets de voyage et d&apos;immigration.
+            {about.heroSubtitle}
           </motion.p>
         </div>
       </section>
@@ -78,18 +86,12 @@ export default function AboutPage() {
               </div>
 
               <h2 className="font-poppins font-bold text-3xl sm:text-4xl text-[#0B1F3A] dark:text-white mb-4">
-                EMLOR Joël
+                {about.founderName}
               </h2>
-              <p className="text-[#D4AF37] font-medium mb-6">Fondateur & Directeur Général</p>
+              <p className="text-[#D4AF37] font-medium mb-6">{about.founderRole}</p>
 
-              <p className="text-gray-600 dark:text-white/60 leading-relaxed mb-6">
-                Fort de plus de 10 années d&apos;expérience dans le domaine des visas et de l&apos;immigration,
-                EMLOR Joël a fondé EMJ-Consulting avec une mission claire : rendre l&apos;accès au voyage
-                international simple, transparent et accessible à tous les Togolais et Africains.
-              </p>
               <p className="text-gray-600 dark:text-white/60 leading-relaxed mb-8">
-                Grâce à sa parfaite connaissance des procédures consulaires et son réseau international,
-                il guide chaque client avec expertise et bienveillance vers la réalisation de leurs projets.
+                {about.founderBio}
               </p>
 
               <div className="grid grid-cols-3 gap-4">
@@ -114,21 +116,9 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              {
-                icon: Target,
-                title: "Notre Mission",
-                text: "Accompagner chaque client dans ses démarches de voyage et d'immigration avec expertise, transparence et résultats concrets.",
-              },
-              {
-                icon: Globe2,
-                title: "Notre Vision",
-                text: "Être l'agence de référence en Afrique de l'Ouest pour l'accès au voyage international et à l'immigration réussie.",
-              },
-              {
-                icon: Heart,
-                title: "Nos Valeurs",
-                text: "Excellence, intégrité, bienveillance et ouverture sur le monde. Nous traitons chaque dossier comme si c'était le nôtre.",
-              },
+              { icon: Target, title: about.missionTitle, text: about.missionText },
+              { icon: Globe2, title: about.visionTitle, text: about.visionText },
+              { icon: Heart, title: "Nos Valeurs", text: "Excellence, intégrité, bienveillance et ouverture sur le monde. Nous traitons chaque dossier comme si c'était le nôtre." },
             ].map((item, i) => (
               <motion.div
                 key={item.title}

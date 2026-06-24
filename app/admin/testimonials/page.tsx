@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, X, Save, Star } from "lucide-react";
 import type { Testimonial } from "@/lib/types";
+import ImageUpload from "@/components/admin/ImageUpload";
 
 const empty: Testimonial = {
   id: "",
@@ -83,8 +84,8 @@ export default function AdminTestimonialsPage() {
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setEditing(null)} />
-          <div className="relative bg-white dark:bg-[#0B1F3A] rounded-3xl p-8 max-w-lg w-full shadow-2xl border border-gray-100 dark:border-white/10">
+          <div className="fixed inset-0 bg-black/50" onClick={() => setEditing(null)} />
+          <div className="relative bg-white dark:bg-[#0B1F3A] rounded-3xl p-8 max-w-lg lg:max-w-[75vw] w-full shadow-2xl border border-gray-100 dark:border-white/10">
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-poppins font-bold text-xl text-gray-900 dark:text-white">
                 {editing.id ? "Modifier" : "Nouveau témoignage"}
@@ -96,7 +97,6 @@ export default function AdminTestimonialsPage() {
                 { key: "name", label: "Nom" },
                 { key: "role", label: "Rôle" },
                 { key: "country", label: "Pays du visa" },
-                { key: "avatar", label: "URL Avatar" },
               ].map((f) => (
                 <div key={f.key}>
                   <label className="block text-sm font-medium text-gray-600 dark:text-white/60 mb-1">{f.label}</label>
@@ -108,6 +108,7 @@ export default function AdminTestimonialsPage() {
                   />
                 </div>
               ))}
+              <ImageUpload label="Photo du client" value={editing.avatar} onChange={(url) => setEditing({ ...editing, avatar: url })} folder="emj-consulting/avatars" />
               <div>
                 <label className="block text-sm font-medium text-gray-600 dark:text-white/60 mb-1">Note ({editing.rating}/5)</label>
                 <input type="range" min="1" max="5" value={editing.rating} onChange={(e) => setEditing({ ...editing, rating: Number(e.target.value) })} className="w-full accent-[#D4AF37]" />

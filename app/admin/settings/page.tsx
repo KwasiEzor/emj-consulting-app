@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Save, Globe, Mail, Phone, MapPin } from "lucide-react";
+import ImageUpload from "@/components/admin/ImageUpload";
 import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import { SiTiktok } from "@react-icons/all-files/si/SiTiktok";
@@ -61,6 +62,7 @@ export default function AdminSettingsPage() {
           <h2 className="font-semibold text-gray-900 dark:text-white mb-5">Informations de contact</h2>
           <div className="space-y-4">
             <Field label="Nom du site" icon={Globe} field="siteName" />
+            <ImageUpload label="Logo du site" value={settings.logo || ""} onChange={(url) => setSettings({ ...settings, logo: url })} folder="emj-consulting/branding" />
             <Field label="Email" icon={Mail} field="email" type="email" />
             <Field label="Téléphone" icon={Phone} field="phone" />
             <Field label="WhatsApp" icon={FaWhatsapp} field="whatsapp" />
@@ -124,6 +126,7 @@ export default function AdminSettingsPage() {
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 text-gray-900 dark:text-white focus:outline-none focus:border-[#D4AF37] text-sm"
               />
             </div>
+            <ImageUpload label="Image Open Graph (partage réseaux sociaux)" value={settings.seo.ogImage || ""} onChange={(url) => setSettings({ ...settings, seo: { ...settings.seo, ogImage: url } })} folder="emj-consulting/branding" />
             <div>
               <label className="block text-sm font-medium text-gray-600 dark:text-white/60 mb-1.5">Google Maps Embed URL</label>
               <input

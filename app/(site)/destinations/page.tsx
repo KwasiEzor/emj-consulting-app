@@ -2,12 +2,18 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MapPin, Clock, FileText, Plane, Search } from "lucide-react";
 import { getDestinations } from "@/lib/data";
+import type { PageContent } from "@/lib/types";
+import pagesData from "@/data/pages.json";
 
 export default function DestinationsPage() {
   const destinations = getDestinations();
+  const [pg, setPg] = useState<PageContent["destinations"]>(pagesData.destinations as PageContent["destinations"]);
+  useEffect(() => {
+    fetch("/api/pages").then(r => r.json()).then(d => setPg(d.destinations));
+  }, []);
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -27,10 +33,10 @@ export default function DestinationsPage() {
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="font-poppins font-bold text-4xl sm:text-6xl text-white mb-6">
-            Nos <span className="gold-text">Destinations</span>
+            {pg.heroTitle}
           </motion.h1>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="text-white/70 text-xl mb-8">
-            30+ destinations disponibles. Choisissez la vôtre.
+            {pg.heroSubtitle}
           </motion.p>
           {/* Search */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="relative max-w-md mx-auto">
@@ -66,7 +72,7 @@ export default function DestinationsPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A] via-[#0B1F3A]/40 to-transparent" />
 
                 {/* Flag */}
-                <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-lg">
+                <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-black/30 flex items-center justify-center text-2xl shadow-lg">
                   {dest.flag}
                 </div>
 
@@ -92,11 +98,12 @@ export default function DestinationsPage() {
                 className="fixed inset-0 z-50 flex items-center justify-center p-4"
                 onClick={() => setSelected(null)}
               >
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+                <div className="absolute inset-0 bg-black/60" />
                 <motion.div
-                  initial={{ scale: 0.9, y: 40 }}
-                  animate={{ scale: 1, y: 0 }}
-                  exit={{ scale: 0.9, y: 40 }}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: 20, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
                   onClick={(e) => e.stopPropagation()}
                   className="relative bg-white dark:bg-[#0B1F3A] rounded-3xl p-8 max-w-lg w-full shadow-2xl border border-gray-100 dark:border-white/10"
                 >

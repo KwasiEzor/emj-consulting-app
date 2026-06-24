@@ -1,0 +1,24 @@
+[
+  {
+    "id": "v-1782325111827-1h9i",
+    "page": "/destinations",
+    "country": "XX",
+    "countryName": "XX",
+    "city": "",
+    "device": "desktop",
+    "browser": "Chrome",
+    "referrer": "localhost",
+    "timestamp": "2026-06-24T18:18:31.827Z"
+  },
+  {
+    "id": "v-1782325386000-ru14",
+    "page": "/destinations",
+    "country": "XX",
+    "countryName": "XX",
+    "city": "",
+    "device": "desktop",
+    "browser": "Chrome",
+    "referrer": "localhost",
+    "timestamp": "2026-06-24T18:23:06.000Z"
+  }
+]

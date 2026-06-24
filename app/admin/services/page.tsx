@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Pencil, Trash2, X, Save, Plus } from "lucide-react";
 import type { Service } from "@/lib/types";
+import ImageUpload from "@/components/admin/ImageUpload";
 
 const empty: Service = {
   id: "",
@@ -78,8 +79,8 @@ export default function AdminServicesPage() {
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-16 overflow-y-auto">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setEditing(null)} />
-          <div className="relative bg-white dark:bg-[#0B1F3A] rounded-3xl p-8 max-w-lg w-full shadow-2xl border border-gray-100 dark:border-white/10 mb-8">
+          <div className="fixed inset-0 bg-black/50" onClick={() => setEditing(null)} />
+          <div className="relative bg-white dark:bg-[#0B1F3A] rounded-3xl p-8 max-w-lg lg:max-w-[75vw] w-full shadow-2xl border border-gray-100 dark:border-white/10 mb-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-poppins font-bold text-xl text-gray-900 dark:text-white">{editing.id ? "Modifier" : "Nouveau service"}</h2>
               <button onClick={() => setEditing(null)}><X className="w-5 h-5 text-gray-400" /></button>
@@ -88,7 +89,6 @@ export default function AdminServicesPage() {
               {[
                 { key: "title", label: "Titre" },
                 { key: "icon", label: "Icône (nom Lucide)" },
-                { key: "image", label: "URL Image" },
                 { key: "shortDesc", label: "Description courte" },
               ].map((f) => (
                 <div key={f.key}>
@@ -96,6 +96,9 @@ export default function AdminServicesPage() {
                   <input type="text" value={(editing as unknown as Record<string, string>)[f.key] || ""} onChange={(e) => setEditing({ ...editing, [f.key]: e.target.value })} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 text-gray-900 dark:text-white focus:outline-none focus:border-[#D4AF37] text-sm" />
                 </div>
               ))}
+              <div>
+                <ImageUpload label="Image" value={editing.image} onChange={(url) => setEditing({ ...editing, image: url })} folder="emj-consulting/services" />
+              </div>
               <div>
                 <label className="block text-sm font-medium text-gray-600 dark:text-white/60 mb-1">Description complète</label>
                 <textarea rows={3} value={editing.description} onChange={(e) => setEditing({ ...editing, description: e.target.value })} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 text-gray-900 dark:text-white focus:outline-none focus:border-[#D4AF37] text-sm resize-none" />

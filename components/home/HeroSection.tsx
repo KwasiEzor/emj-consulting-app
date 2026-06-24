@@ -5,13 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar, TrendingUp, Globe2, Star, Clock } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
+import type { PageContent } from "@/lib/types";
 
-const stats = [
-  { value: 500, suffix: "+", label: "Visas obtenus", icon: TrendingUp },
-  { value: 30, suffix: "+", label: "Destinations", icon: Globe2 },
-  { value: 98, suffix: "%", label: "Clients satisfaits", icon: Star },
-  { value: 10, suffix: "+", label: "Années d'expérience", icon: Clock },
-];
+const statIcons = [TrendingUp, Globe2, Star, Clock];
 
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
@@ -44,7 +40,7 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-export default function HeroSection() {
+export default function HeroSection({ content }: { content: PageContent["home"] }) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background — priority load, no JS animation */}
@@ -71,7 +67,7 @@ export default function HeroSection() {
           className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-8 text-[#D4AF37] text-sm font-medium"
         >
           <Globe2 className="w-4 h-4" />
-          Agence de voyage & visa certifiée — Lomé, Togo
+          {content.badge}
         </motion.div>
 
         {/* Headline */}
@@ -81,9 +77,7 @@ export default function HeroSection() {
           transition={{ delay: 0.15, duration: 0.7 }}
           className="font-poppins font-bold text-4xl sm:text-5xl lg:text-7xl text-white leading-tight mb-6 max-w-5xl mx-auto"
         >
-          Votre partenaire de confiance pour vos{" "}
-          <span className="gold-text">voyages</span> et{" "}
-          <span className="gold-text">demandes de visa</span>
+          {content.title}
         </motion.h1>
 
         {/* Subtitle */}
@@ -93,8 +87,7 @@ export default function HeroSection() {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="text-white/70 text-lg sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed"
         >
-          EMJ-Consulting accompagne particuliers, étudiants et professionnels dans
-          leurs démarches de voyage et d&apos;immigration avec expertise et sérénité.
+          {content.subtitle}
         </motion.p>
 
         {/* CTAs */}
@@ -108,7 +101,7 @@ export default function HeroSection() {
             href="/services"
             className="group flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-[#D4AF37] hover:bg-[#b8941e] text-[#0B1F3A] font-bold text-lg transition-all hover:scale-105 hover:shadow-2xl hover:shadow-[#D4AF37]/30"
           >
-            Commencer maintenant
+            {content.ctaPrimary}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
@@ -116,7 +109,7 @@ export default function HeroSection() {
             className="flex items-center justify-center gap-2 px-8 py-4 rounded-2xl glass border border-white/20 text-white font-semibold text-lg hover:border-[#D4AF37]/50 hover:bg-white/10 transition-all hover:scale-105"
           >
             <Calendar className="w-5 h-5" />
-            Prendre rendez-vous
+            {content.ctaSecondary}
           </Link>
         </motion.div>
 
@@ -127,18 +120,21 @@ export default function HeroSection() {
           transition={{ delay: 0.6, duration: 0.7 }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto"
         >
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="glass rounded-2xl p-5 text-center hover:border-[#D4AF37]/30 transition-colors group"
-            >
-              <stat.icon className="w-5 h-5 text-[#D4AF37] mx-auto mb-2 group-hover:scale-110 transition-transform" />
-              <div className="font-poppins font-bold text-2xl lg:text-3xl text-white">
-                <CountUp target={stat.value} suffix={stat.suffix} />
+          {content.stats.map((stat, i) => {
+            const Icon = statIcons[i % statIcons.length];
+            return (
+              <div
+                key={stat.label}
+                className="glass rounded-2xl p-5 text-center hover:border-[#D4AF37]/30 transition-colors group"
+              >
+                <Icon className="w-5 h-5 text-[#D4AF37] mx-auto mb-2 group-hover:scale-110 transition-transform" />
+                <div className="font-poppins font-bold text-2xl lg:text-3xl text-white">
+                  <CountUp target={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="text-white/50 text-xs mt-1">{stat.label}</div>
               </div>
-              <div className="text-white/50 text-xs mt-1">{stat.label}</div>
-            </div>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
 

@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Plane, GraduationCap, Briefcase, Users, FileText, Hotel, Ticket, Shield, Globe, Check } from "lucide-react";
 import { getServices } from "@/lib/data";
+import { useState, useEffect } from "react";
+import type { PageContent } from "@/lib/types";
+import pagesData from "@/data/pages.json";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Plane, GraduationCap, Briefcase, Users, FileText, Hotel, Ticket, Shield, Globe,
@@ -11,6 +14,10 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export default function ServicesPage() {
   const services = getServices();
+  const [pg, setPg] = useState<PageContent["services"]>(pagesData.services as PageContent["services"]);
+  useEffect(() => {
+    fetch("/api/pages").then(r => r.json()).then(d => setPg(d.services));
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -22,10 +29,10 @@ export default function ServicesPage() {
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="font-poppins font-bold text-4xl sm:text-6xl text-white mb-6">
-            Nos <span className="gold-text">Services</span>
+            {pg.heroTitle}
           </motion.h1>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="text-white/70 text-xl">
-            Une gamme complète pour tous vos besoins de voyage et d&apos;immigration.
+            {pg.heroSubtitle}
           </motion.p>
         </div>
       </section>

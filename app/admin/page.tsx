@@ -1,18 +1,31 @@
 import { getServices, getDestinations, getTestimonials, getBlogPosts } from "@/lib/data";
-import { FileText, Star, MapPin, Briefcase, TrendingUp, Users } from "lucide-react";
+import { FileText, Star, MapPin, Briefcase, TrendingUp, Users, CalendarCheck } from "lucide-react";
 import Link from "next/link";
+import { readFileSync } from "fs";
+import path from "path";
+import type { Appointment } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
+
+function getAppointments(): Appointment[] {
+  try {
+    return JSON.parse(readFileSync(path.join(process.cwd(), "data", "appointments.json"), "utf-8"));
+  } catch { return []; }
+}
 
 export default function AdminDashboard() {
   const posts = getBlogPosts();
   const testimonials = getTestimonials();
   const destinations = getDestinations();
   const services = getServices();
+  const appointments = getAppointments();
+  const pendingCount = appointments.filter(a => a.status === "pending").length;
 
   const stats = [
+    { label: "Rendez-vous", value: appointments.length, icon: CalendarCheck, href: "/admin/appointments", color: "bg-amber-500/10 text-amber-500", badge: pendingCount > 0 ? pendingCount : undefined },
     { label: "Articles", value: posts.length, icon: FileText, href: "/admin/blog", color: "bg-blue-500/10 text-blue-500" },
     { label: "Témoignages", value: testimonials.length, icon: Star, href: "/admin/testimonials", color: "bg-yellow-500/10 text-yellow-500" },
     { label: "Destinations", value: destinations.length, icon: MapPin, href: "/admin/destinations", color: "bg-green-500/10 text-green-500" },
-    { label: "Services", value: services.length, icon: Briefcase, href: "/admin/services", color: "bg-purple-500/10 text-purple-500" },
   ];
 
   return (
@@ -25,7 +38,12 @@ export default function AdminDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {stats.map((s) => (
-          <Link key={s.label} href={s.href} className="group bg-white dark:bg-[#0B1F3A] rounded-2xl p-6 border border-gray-100 dark:border-white/10 hover:border-[#D4AF37]/40 transition-colors">
+          <Link key={s.label} href={s.href} className="group relative bg-white dark:bg-[#0B1F3A] rounded-2xl p-6 border border-gray-100 dark:border-white/10 hover:border-[#D4AF37]/40 transition-colors">
+            {"badge" in s && s.badge !== undefined && (
+              <span className="absolute top-3 right-3 min-w-5 h-5 px-1.5 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center justify-center">
+                {s.badge}
+              </span>
+            )}
             <div className={`w-10 h-10 rounded-xl ${s.color} flex items-center justify-center mb-3`}>
               <s.icon className="w-5 h-5" />
             </div>
