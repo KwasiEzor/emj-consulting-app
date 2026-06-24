@@ -58,7 +58,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative py-32 bg-[#0B1F3A] overflow-hidden">
+      <section className="relative py-20 sm:py-32 bg-[#0B1F3A] overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img src="/images/hero/contact-bg.jpg" alt="" className="w-full h-full object-cover" />
         </div>
@@ -73,9 +73,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white dark:bg-[#050e1c]">
+      <section className="py-12 sm:py-24 bg-white dark:bg-[#050e1c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-16">
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-16">
             {/* Info */}
             <div className="lg:col-span-2 space-y-8">
               <div>
@@ -108,7 +108,7 @@ export default function ContactPage() {
               {/* Social */}
               <div>
                 <h3 className="font-semibold text-[#0B1F3A] dark:text-white mb-4">Réseaux sociaux</h3>
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-3">
                   {[
                     { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/14389515445", color: "bg-[#25D366]/10 text-[#25D366]" },
                     { icon: FaFacebookF, label: "Facebook", href: "#", color: "bg-blue-500/10 text-blue-500" },
@@ -136,7 +136,7 @@ export default function ContactPage() {
 
             {/* Form */}
             <div className="lg:col-span-3">
-              <div className="rounded-3xl border border-gray-100 dark:border-white/10 p-8">
+              <div className="rounded-3xl border border-gray-100 dark:border-white/10 p-4 sm:p-8">
                 <h2 className="font-poppins font-bold text-2xl text-[#0B1F3A] dark:text-white mb-8">{pg.formTitle}</h2>
 
                 {success ? (
