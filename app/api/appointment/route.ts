@@ -46,7 +46,12 @@ export async function POST(req: NextRequest) {
     writeFileSync(FILE, JSON.stringify(updated, null, 2));
     updateDataFile("appointments.json", updated);
 
-    await sendAppointmentEmail({ name, email, phone, service, date, time, notes });
+    try {
+      await sendAppointmentEmail({ name, email, phone, service, date, time, notes });
+    } catch (emailErr) {
+      console.error("Email send failed (appointment saved):", emailErr);
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Appointment error:", error);

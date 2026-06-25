@@ -36,16 +36,25 @@ export default function AppointmentPage() {
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async () => {
     setLoading(true);
+    setError("");
     try {
       const res = await fetch("/api/appointment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (res.ok) setSuccess(true);
+      if (res.ok) {
+        setSuccess(true);
+      } else {
+        const body = await res.json().catch(() => ({}));
+        setError(body.error || "Une erreur est survenue. Veuillez réessayer.");
+      }
+    } catch {
+      setError("Une erreur réseau est survenue. Veuillez réessayer.");
     } finally {
       setLoading(false);
     }
@@ -262,6 +271,7 @@ export default function AppointmentPage() {
                     </div>
                   ))}
                 </div>
+                {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
                 <div className="flex gap-3">
                   <button onClick={() => setStep(3)} className="flex-1 py-3 rounded-xl border border-gray-200 dark:border-white/10 text-gray-600 dark:text-white/60 font-medium">Retour</button>
                   <button
