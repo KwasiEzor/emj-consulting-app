@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Calendar, Clock, User, Mail, Phone, FileText,
   Search, Check, X, Trash2, ChevronDown, ChevronUp,
-  RefreshCw, AlertCircle,
+  RefreshCw, AlertCircle, Bell,
 } from "lucide-react";
+import toast from "react-hot-toast";
 import type { Appointment, AppointmentStatus } from "@/lib/types";
 
 const STATUS_CONFIG: Record<AppointmentStatus, { label: string; bg: string; text: string; dot: string }> = {
@@ -38,6 +39,8 @@ export default function AdminAppointmentsPage() {
   const [updating, setUpdating] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  const [liveStatus, setLiveStatus] = useState<"connecting" | "live" | "offline">("connecting");
+  const countRef = useRef<number | null>(null);
 
   const load = async () => {
     setLoading(true);
@@ -48,6 +51,58 @@ export default function AdminAppointmentsPage() {
   };
 
   useEffect(() => { load(); }, []);
+
+  // SSE for real-time updates
+  useEffect(() => {
+    let es: EventSource | null = null;
+    let retryTimeout: ReturnType<typeof setTimeout>;
+
+    const connect = () => {
+      es = new EventSource("/api/admin/appointments/stream");
+
+      es.onopen = () => setLiveStatus("live");
+
+      es.onmessage = (e) => {
+        const msg = JSON.parse(e.data);
+        if (msg.type === "connected") {
+          countRef.current = msg.count;
+        } else if (msg.type === "new_appointment") {
+          const diff = msg.diff as number;
+          countRef.current = msg.count;
+          load();
+          toast.custom(
+            (t) => (
+              <div className={`flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0B1F3A] border border-[#D4AF37]/30 shadow-xl text-white text-sm ${t.visible ? "animate-enter" : "animate-leave"}`}>
+                <Bell className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                <span>{diff === 1 ? "Nouveau rendez-vous reçu !" : `${diff} nouveaux rendez-vous reçus !`}</span>
+              </div>
+            ),
+            { duration: 5000 }
+          );
+        }
+      };
+
+      es.onerror = () => {
+        setLiveStatus("offline");
+        es?.close();
+        retryTimeout = setTimeout(connect, 10000);
+      };
+    };
+
+    connect();
+
+    // Auto-poll fallback every 60s when SSE is offline
+    const pollInterval = setInterval(() => {
+      if (liveStatus === "offline") load();
+    }, 60000);
+
+    return () => {
+      es?.close();
+      clearTimeout(retryTimeout);
+      clearInterval(pollInterval);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const filtered = useMemo(() => {
     return appointments.filter((a) => {
@@ -104,7 +159,22 @@ export default function AdminAppointmentsPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-poppins font-bold text-2xl text-gray-900 dark:text-white">Rendez-vous</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="font-poppins font-bold text-2xl text-gray-900 dark:text-white">Rendez-vous</h1>
+            <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium ${
+              liveStatus === "live"
+                ? "bg-green-500/10 text-green-600 dark:text-green-400"
+                : liveStatus === "connecting"
+                ? "bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                : "bg-gray-100 dark:bg-white/10 text-gray-400 dark:text-white/40"
+            }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${
+                liveStatus === "live" ? "bg-green-500 animate-pulse" :
+                liveStatus === "connecting" ? "bg-amber-500" : "bg-gray-400"
+              }`} />
+              {liveStatus === "live" ? "En direct" : liveStatus === "connecting" ? "Connexion..." : "Hors ligne"}
+            </span>
+          </div>
           <p className="text-gray-500 dark:text-white/50 text-sm mt-1">{stats.total} demande{stats.total !== 1 ? "s" : ""} au total</p>
         </div>
         <button onClick={load} disabled={loading} className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 text-gray-600 dark:text-white/60 hover:border-[#D4AF37]/40 text-sm transition-colors">

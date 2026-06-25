@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "EMJ-Consulting | Agence de voyage et visa",
@@ -33,6 +34,7 @@ export default function RootLayout({
             disableTransitionOnChange={false}
           >
             {children}
+            <Toaster position="top-right" />
           </ThemeProvider>
         </body>
       </html>

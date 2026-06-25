@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Calendar, Clock, User, Mail, Phone, FileText, CheckCircle, ChevronRight } from "lucide-react";
+import { Calendar, Clock, User, Mail, Phone, FileText, CheckCircle, ChevronRight, MessageCircle } from "lucide-react";
 
 const services = [
   "Visa Touristique",
@@ -80,12 +80,23 @@ export default function AppointmentPage() {
           <p className="text-gray-500 dark:text-white/50 mb-8">
             {form.date} à {form.time} — Un email de confirmation a été envoyé à {form.email}
           </p>
-          <button
-            onClick={() => { setSuccess(false); setStep(1); setForm({ service: "", date: "", time: "", name: "", email: "", phone: "", notes: "" }); }}
-            className="px-8 py-3 rounded-xl bg-[#D4AF37] text-[#0B1F3A] font-semibold"
-          >
-            Nouveau rendez-vous
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="https://wa.me/14389515445"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 px-8 py-3 rounded-xl bg-[#25D366] text-white font-semibold hover:bg-[#1fba59] transition-colors"
+            >
+              <MessageCircle className="w-5 h-5" />
+              Contacter via WhatsApp
+            </a>
+            <button
+              onClick={() => { setSuccess(false); setStep(1); setForm({ service: "", date: "", time: "", name: "", email: "", phone: "", notes: "" }); }}
+              className="px-8 py-3 rounded-xl bg-[#D4AF37] text-[#0B1F3A] font-semibold"
+            >
+              Nouveau rendez-vous
+            </button>
+          </div>
         </motion.div>
       </div>
     );

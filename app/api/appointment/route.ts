@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendAppointmentEmail } from "@/lib/email";
+import { sendPushToAll } from "@/lib/push";
 import { updateDataFile } from "@/lib/github-cms";
 import { writeFileSync, readFileSync } from "fs";
 import path from "path";
@@ -46,11 +47,16 @@ export async function POST(req: NextRequest) {
     writeFileSync(FILE, JSON.stringify(updated, null, 2));
     updateDataFile("appointments.json", updated);
 
-    try {
-      await sendAppointmentEmail({ name, email, phone, service, date, time, notes });
-    } catch (emailErr) {
-      console.error("Email send failed (appointment saved):", emailErr);
-    }
+    await Promise.allSettled([
+      sendAppointmentEmail({ name, email, phone, service, date, time, notes }).catch((e) =>
+        console.error("Email failed:", e)
+      ),
+      sendPushToAll({
+        title: "Nouveau rendez-vous !",
+        body: `${name} — ${service} le ${date} à ${time}`,
+        url: "/admin/appointments",
+      }).catch((e) => console.error("Push failed:", e)),
+    ]);
 
     return NextResponse.json({ success: true });
   } catch (error) {

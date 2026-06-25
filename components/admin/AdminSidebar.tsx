@@ -6,6 +6,7 @@ import { UserButton } from "@clerk/nextjs";
 import {
   LayoutDashboard, FileText, Star, MapPin, Briefcase, Settings, Globe, ExternalLink, LayoutTemplate, CalendarCheck, BarChart2,
 } from "lucide-react";
+import PushNotificationManager from "./PushNotificationManager";
 
 const navItems = [
   { href: "/admin", icon: LayoutDashboard, label: "Tableau de bord" },
@@ -60,6 +61,7 @@ export default function AdminSidebar() {
 
       {/* Footer */}
       <div className="p-4 border-t border-white/10 space-y-3">
+        <PushNotificationManager />
         <Link
           href="/"
           target="_blank"
