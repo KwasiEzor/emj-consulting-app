@@ -121,6 +121,28 @@
     "featured": false
   },
   {
+    "id": "equivalence-diplomes",
+    "icon": "Award",
+    "title": "Équivalence de Diplômes",
+    "shortDesc": "Faites reconnaître vos diplômes étrangers dans le pays de destination.",
+    "description": "Nous vous accompagnons dans les démarches de reconnaissance et d'équivalence de vos diplômes à l'étranger. Un service essentiel pour valider votre parcours académique et faciliter votre insertion professionnelle.",
+    "advantages": ["Expertise pays par pays", "Dossier complet", "Suivi administratif", "Délais optimisés"],
+    "process": ["Analyse des diplômes", "Constitution du dossier", "Soumission aux autorités", "Suivi de la demande", "Obtention de l'équivalence"],
+    "image": "/images/services/visa-etudiant.jpg",
+    "featured": false
+  },
+  {
+    "id": "preparation-tcf-tef",
+    "icon": "BookOpen",
+    "title": "Préparation TCF / TEF",
+    "shortDesc": "Cours préparatoires pour réussir vos tests de langue française.",
+    "description": "Préparez-vous efficacement au TCF (Test de Connaissance du Français) et au TEF (Test d'Évaluation de Français) avec nos formateurs certifiés. Ces tests sont obligatoires pour de nombreuses demandes de visa et d'immigration.",
+    "advantages": ["Formateurs certifiés", "Cours individuels ou groupes", "Exercices pratiques", "Taux de réussite élevé"],
+    "process": ["Évaluation niveau", "Programme personnalisé", "Sessions de cours", "Tests blancs", "Passage examen"],
+    "image": "/images/services/assistance-administrative.jpg",
+    "featured": false
+  },
+  {
     "id": "conseils-immigration",
     "icon": "Globe",
     "title": "Conseils Immigration",
