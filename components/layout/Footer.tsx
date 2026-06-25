@@ -72,7 +72,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed mb-5">
-              Votre partenaire de confiance pour vos voyages et demandes de visa depuis Lomé, Togo.
+              Vos rêves, notre priorité. Vivez l&apos;aventure à chaque étape depuis Lomé, Togo.
             </p>
             <div className="flex gap-3">
               <a href="#" aria-label="Facebook" className="w-9 h-9 rounded-lg glass flex items-center justify-center text-white/60 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-colors">
@@ -131,8 +131,14 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                <a href="tel:+22893474963" className="text-white/50 hover:text-white text-sm transition-colors">
-                  +228 93 47 49 63
+                <a href="tel:+22890123999" className="text-white/50 hover:text-white text-sm transition-colors">
+                  +228 90 12 39 99
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                <a href="tel:+22898966121" className="text-white/50 hover:text-white text-sm transition-colors">
+                  +228 98 96 61 21
                 </a>
               </li>
             </ul>

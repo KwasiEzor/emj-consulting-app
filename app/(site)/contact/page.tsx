@@ -84,7 +84,8 @@ export default function ContactPage() {
                   {[
                     { icon: MapPin, label: "Adresse", value: "Lomé, République Togolaise" },
                     { icon: Mail, label: "Email", value: "info@emj-consulting.fr", href: "mailto:info@emj-consulting.fr" },
-                    { icon: Phone, label: "Téléphone", value: "+228 93 47 49 63", href: "tel:+22893474963" },
+                    { icon: Phone, label: "Téléphone", value: "+228 90 12 39 99", href: "tel:+22890123999" },
+                    { icon: Phone, label: "Téléphone 2", value: "+228 98 96 61 21", href: "tel:+22898966121" },
                   ].map((item) => (
                     <div key={item.label} className="flex items-start gap-4 p-4 rounded-xl border border-gray-100 dark:border-white/10">
                       <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center shrink-0">

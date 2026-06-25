@@ -88,6 +88,39 @@
     "featured": false
   },
   {
+    "id": "visa-travail",
+    "icon": "HardHat",
+    "title": "Visa de Travail",
+    "shortDesc": "Obtenez votre permis de travail à l'étranger avec notre accompagnement expert.",
+    "description": "Nous vous accompagnons dans toutes les démarches pour obtenir votre visa de travail ou permis de travail à l'étranger. De l'offre d'emploi à l'obtention du visa.",
+    "advantages": ["Expertise permis travail", "Accompagnement employeur", "Suivi dossier", "Taux de succès élevé"],
+    "process": ["Évaluation profil", "Offre d'emploi validée", "Constitution dossier", "Soumission consulat", "Obtention visa"],
+    "image": "/images/services/visa-affaires.jpg",
+    "featured": true
+  },
+  {
+    "id": "tourisme",
+    "icon": "Compass",
+    "title": "Tourisme",
+    "shortDesc": "Voyages organisés et circuits touristiques sur mesure.",
+    "description": "Nous organisons vos voyages touristiques de A à Z : circuits, séjours, voyages de noces, groupes. Des expériences inoubliables aux quatre coins du monde.",
+    "advantages": ["Circuits sur mesure", "Guides expérimentés", "Prix tout inclus", "Assistance voyage"],
+    "process": ["Choix destination", "Planification itinéraire", "Réservations", "Documents voyage", "Départ serein"],
+    "image": "/images/services/visa-touriste.jpg",
+    "featured": false
+  },
+  {
+    "id": "location-vehicules",
+    "icon": "Car",
+    "title": "Location de Véhicules",
+    "shortDesc": "Location de voitures et véhicules à destination pour vos déplacements.",
+    "description": "Réservez votre véhicule de location à destination avant même votre départ. Nous négocions les meilleurs tarifs auprès des meilleures agences mondiales.",
+    "advantages": ["Meilleurs tarifs", "Large choix véhicules", "Réservation anticipée", "Assurance incluse"],
+    "process": ["Choix véhicule", "Dates et lieu", "Réservation", "Confirmation", "Récupération à l'arrivée"],
+    "image": "/images/services/reservation-hotel.jpg",
+    "featured": false
+  },
+  {
     "id": "conseils-immigration",
     "icon": "Globe",
     "title": "Conseils Immigration",
