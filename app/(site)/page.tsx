@@ -12,11 +12,13 @@ const TestimonialsSection = nextDynamic(() => import("@/components/home/Testimon
 const FaqSection = nextDynamic(() => import("@/components/home/FaqSection"));
 const CtaSection = nextDynamic(() => import("@/components/home/CtaSection"));
 
-export default function HomePage() {
-  const services = getServices();
-  const destinations = getDestinations();
-  const testimonials = getTestimonials();
-  const pages = getPageContent();
+export default async function HomePage() {
+  const [services, destinations, testimonials, pages] = await Promise.all([
+    getServices(),
+    getDestinations(),
+    getTestimonials(),
+    getPageContent(),
+  ]);
 
   return (
     <>

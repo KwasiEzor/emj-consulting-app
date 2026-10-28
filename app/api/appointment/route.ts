@@ -1,20 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendAppointmentEmail } from "@/lib/email";
 import { sendPushToAll } from "@/lib/push";
-import { updateDataFile } from "@/lib/github-cms";
-import { writeFileSync, readFileSync } from "fs";
-import path from "path";
-import type { Appointment } from "@/lib/types";
-
-const FILE = path.join(process.cwd(), "data", "appointments.json");
-
-function readAppointments(): Appointment[] {
-  try {
-    return JSON.parse(readFileSync(FILE, "utf-8"));
-  } catch {
-    return [];
-  }
-}
+import { db } from "@/lib/db";
+import { appointments } from "@/lib/db/schema";
 
 export async function POST(req: NextRequest) {
   try {
@@ -29,8 +17,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Adresse email invalide" }, { status: 400 });
     }
 
-    const appointment: Appointment = {
-      id: `appt-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    const id = `appt-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    await db.insert(appointments).values({
+      id,
       name,
       email,
       phone,
@@ -39,13 +28,7 @@ export async function POST(req: NextRequest) {
       time,
       notes: notes ?? "",
       status: "pending",
-      createdAt: new Date().toISOString(),
-    };
-
-    const existing = readAppointments();
-    const updated = [appointment, ...existing];
-    writeFileSync(FILE, JSON.stringify(updated, null, 2));
-    updateDataFile("appointments.json", updated);
+    });
 
     await Promise.allSettled([
       sendAppointmentEmail({ name, email, phone, service, date, time, notes }).catch((e) =>

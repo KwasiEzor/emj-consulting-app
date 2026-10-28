@@ -1,23 +1,18 @@
 import { NextRequest } from "next/server";
 import { requireAdmin } from "@/lib/auth";
-import { readFileSync } from "fs";
-import path from "path";
+import { neon } from "@neondatabase/serverless";
 
-const FILE = path.join(process.cwd(), "data", "appointments.json");
-
-function readCount(): number {
-  try {
-    return (JSON.parse(readFileSync(FILE, "utf-8")) as unknown[]).length;
-  } catch {
-    return 0;
-  }
+async function readCount(): Promise<number> {
+  const sql = neon(process.env.DATABASE_URL!);
+  const rows = await sql`SELECT COUNT(*)::int AS count FROM appointments`;
+  return rows[0]?.count ?? 0;
 }
 
 export async function GET(req: NextRequest) {
   const { isAdmin } = await requireAdmin();
   if (!isAdmin) return new Response("Forbidden", { status: 403 });
 
-  let count = readCount();
+  let count = await readCount();
 
   const stream = new ReadableStream({
     start(controller) {
@@ -27,8 +22,8 @@ export async function GET(req: NextRequest) {
 
       send(JSON.stringify({ type: "connected", count }));
 
-      const interval = setInterval(() => {
-        const newCount = readCount();
+      const interval = setInterval(async () => {
+        const newCount = await readCount();
         if (newCount !== count) {
           send(JSON.stringify({ type: "new_appointment", count: newCount, diff: newCount - count }));
           count = newCount;

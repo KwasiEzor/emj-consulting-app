@@ -1,8 +1,7 @@
 import webpush from "web-push";
-import { readFileSync, writeFileSync } from "fs";
-import path from "path";
-
-const FILE = path.join(process.cwd(), "data", "push-subscriptions.json");
+import { db } from "./db";
+import { pushSubscriptions } from "./db/schema";
+import { eq } from "drizzle-orm";
 
 webpush.setVapidDetails(
   process.env.VAPID_EMAIL || "mailto:info@emj-consulting.fr",
@@ -15,26 +14,33 @@ export type PushSubscriptionData = {
   keys: { p256dh: string; auth: string };
 };
 
-export function readSubscriptions(): PushSubscriptionData[] {
-  try {
-    return JSON.parse(readFileSync(FILE, "utf-8"));
-  } catch {
-    return [];
-  }
+export async function readSubscriptions(): Promise<PushSubscriptionData[]> {
+  const rows = await db.select().from(pushSubscriptions);
+  return rows.map((r) => ({ endpoint: r.endpoint, keys: r.keys }));
 }
 
-export function saveSubscription(sub: PushSubscriptionData) {
-  const subs = readSubscriptions().filter((s) => s.endpoint !== sub.endpoint);
-  writeFileSync(FILE, JSON.stringify([...subs, sub], null, 2));
+export async function saveSubscription(sub: PushSubscriptionData) {
+  const id = `push-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+  await db
+    .insert(pushSubscriptions)
+    .values({ id, endpoint: sub.endpoint, keys: sub.keys })
+    .onConflictDoUpdate({
+      target: pushSubscriptions.endpoint,
+      set: { keys: sub.keys },
+    });
 }
 
-export function removeSubscription(endpoint: string) {
-  const subs = readSubscriptions().filter((s) => s.endpoint !== endpoint);
-  writeFileSync(FILE, JSON.stringify(subs, null, 2));
+export async function removeSubscription(endpoint: string) {
+  await db.delete(pushSubscriptions).where(eq(pushSubscriptions.endpoint, endpoint));
 }
 
-export async function sendPushToAll(payload: { title: string; body: string; icon?: string; url?: string }) {
-  const subs = readSubscriptions();
+export async function sendPushToAll(payload: {
+  title: string;
+  body: string;
+  icon?: string;
+  url?: string;
+}) {
+  const subs = await readSubscriptions();
   const dead: string[] = [];
 
   await Promise.allSettled(
@@ -49,6 +55,6 @@ export async function sendPushToAll(payload: { title: string; body: string; icon
   );
 
   if (dead.length) {
-    dead.forEach(removeSubscription);
+    await Promise.allSettled(dead.map(removeSubscription));
   }
 }

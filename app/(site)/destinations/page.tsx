@@ -4,14 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { MapPin, Clock, FileText, Plane, Search } from "lucide-react";
-import { getDestinations } from "@/lib/data";
-import type { PageContent } from "@/lib/types";
-import pagesData from "@/data/pages.json";
+import type { PageContent, Destination } from "@/lib/types";
 
 export default function DestinationsPage() {
-  const destinations = getDestinations();
-  const [pg, setPg] = useState<PageContent["destinations"]>(pagesData.destinations as PageContent["destinations"]);
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [pg, setPg] = useState<PageContent["destinations"] | null>(null);
   useEffect(() => {
+    fetch("/api/destinations").then(r => r.json()).then(setDestinations);
     fetch("/api/pages").then(r => r.json()).then(d => setPg(d.destinations));
   }, []);
   const [search, setSearch] = useState("");
@@ -23,6 +22,7 @@ export default function DestinationsPage() {
 
   const selectedDest = destinations.find((d) => d.id === selected);
 
+  if (!pg) return null;
   return (
     <div className="min-h-screen">
       {/* Hero */}

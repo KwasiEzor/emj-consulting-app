@@ -8,7 +8,6 @@ import { FaWhatsapp } from "@react-icons/all-files/fa/FaWhatsapp";
 import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import type { PageContent } from "@/lib/types";
-import pagesData from "@/data/pages.json";
 
 const LeafletMap = dynamic(() => import("@/components/map/LeafletMap"), {
   ssr: false,
@@ -23,7 +22,7 @@ const LeafletMap = dynamic(() => import("@/components/map/LeafletMap"), {
 });
 
 export default function ContactPage() {
-  const [pg, setPg] = useState<PageContent["contact"]>(pagesData.contact as PageContent["contact"]);
+  const [pg, setPg] = useState<PageContent["contact"] | null>(null);
   useEffect(() => {
     fetch("/api/pages").then(r => r.json()).then(d => setPg(d.contact));
   }, []);
@@ -55,6 +54,7 @@ export default function ContactPage() {
     }
   };
 
+  if (!pg) return null;
   return (
     <div className="min-h-screen">
       {/* Hero */}

@@ -1,22 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth";
-import { updateDataFile } from "@/lib/github-cms";
-import servicesData from "@/data/services.json";
+import { db } from "@/lib/db";
+import { services } from "@/lib/db/schema";
+import type { Service } from "@/lib/db/schema";
 
 export async function GET() {
-  
   const { isAdmin } = await requireAdmin();
   if (!isAdmin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  return NextResponse.json(servicesData);
+  const rows = await db.select().from(services);
+  return NextResponse.json(rows);
 }
 
 export async function PUT(req: NextRequest) {
-  
   const { isAdmin } = await requireAdmin();
   if (!isAdmin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  const data = await req.json();
-  const ok = await updateDataFile("services.json", data);
-  return ok
-    ? NextResponse.json({ success: true })
-    : NextResponse.json({ error: "GitHub update failed" }, { status: 500 });
+
+  const data: Service[] = await req.json();
+  await db.delete(services);
+  if (data.length > 0) await db.insert(services).values(data);
+  return NextResponse.json({ success: true });
 }

@@ -3,22 +3,22 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Plane, GraduationCap, Briefcase, Users, FileText, Hotel, Ticket, Shield, Globe, Check } from "lucide-react";
-import { getServices } from "@/lib/data";
 import { useState, useEffect } from "react";
-import type { PageContent } from "@/lib/types";
-import pagesData from "@/data/pages.json";
+import type { PageContent, Service } from "@/lib/types";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Plane, GraduationCap, Briefcase, Users, FileText, Hotel, Ticket, Shield, Globe,
 };
 
 export default function ServicesPage() {
-  const services = getServices();
-  const [pg, setPg] = useState<PageContent["services"]>(pagesData.services as PageContent["services"]);
+  const [services, setServices] = useState<Service[]>([]);
+  const [pg, setPg] = useState<PageContent["services"] | null>(null);
   useEffect(() => {
+    fetch("/api/services").then(r => r.json()).then(setServices);
     fetch("/api/pages").then(r => r.json()).then(d => setPg(d.services));
   }, []);
 
+  if (!pg) return null;
   return (
     <div className="min-h-screen">
       {/* Hero */}

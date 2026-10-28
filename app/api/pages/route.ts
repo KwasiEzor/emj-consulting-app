@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
-import { readFileSync } from "fs";
-import path from "path";
+import { db } from "@/lib/db";
+import { pageContent } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const file = path.join(process.cwd(), "data", "pages.json");
-  return NextResponse.json(JSON.parse(readFileSync(file, "utf-8")));
+  const rows = await db.select().from(pageContent).where(eq(pageContent.id, 1));
+  return NextResponse.json(rows[0]?.data ?? {});
 }

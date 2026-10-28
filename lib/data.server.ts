@@ -1,8 +1,9 @@
-import { readFileSync } from "fs";
-import path from "path";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
+import { pageContent } from "./db/schema";
 import type { PageContent } from "./types";
 
-export function getPageContent(): PageContent {
-  const file = path.join(process.cwd(), "data", "pages.json");
-  return JSON.parse(readFileSync(file, "utf-8")) as PageContent;
+export async function getPageContent(): Promise<PageContent> {
+  const rows = await db.select().from(pageContent).where(eq(pageContent.id, 1));
+  return rows[0]?.data as PageContent;
 }

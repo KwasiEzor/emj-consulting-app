@@ -1,28 +1,23 @@
 import { getServices, getDestinations, getTestimonials, getBlogPosts } from "@/lib/data";
-import { FileText, Star, MapPin, Briefcase, TrendingUp, Users, CalendarCheck } from "lucide-react";
+import { FileText, Star, MapPin, TrendingUp, Users, CalendarCheck } from "lucide-react";
 import Link from "next/link";
-import { readFileSync } from "fs";
-import path from "path";
-import type { Appointment } from "@/lib/types";
+import { db } from "@/lib/db";
+import { appointments } from "@/lib/db/schema";
 
 export const dynamic = "force-dynamic";
 
-function getAppointments(): Appointment[] {
-  try {
-    return JSON.parse(readFileSync(path.join(process.cwd(), "data", "appointments.json"), "utf-8"));
-  } catch { return []; }
-}
-
-export default function AdminDashboard() {
-  const posts = getBlogPosts();
-  const testimonials = getTestimonials();
-  const destinations = getDestinations();
-  const services = getServices();
-  const appointments = getAppointments();
-  const pendingCount = appointments.filter(a => a.status === "pending").length;
+export default async function AdminDashboard() {
+  const [posts, testimonials, destinations, services, allAppointments] = await Promise.all([
+    getBlogPosts(),
+    getTestimonials(),
+    getDestinations(),
+    getServices(),
+    db.select().from(appointments),
+  ]);
+  const pendingCount = allAppointments.filter((a) => a.status === "pending").length;
 
   const stats = [
-    { label: "Rendez-vous", value: appointments.length, icon: CalendarCheck, href: "/admin/appointments", color: "bg-amber-500/10 text-amber-500", badge: pendingCount > 0 ? pendingCount : undefined },
+    { label: "Rendez-vous", value: allAppointments.length, icon: CalendarCheck, href: "/admin/appointments", color: "bg-amber-500/10 text-amber-500", badge: pendingCount > 0 ? pendingCount : undefined },
     { label: "Articles", value: posts.length, icon: FileText, href: "/admin/blog", color: "bg-blue-500/10 text-blue-500" },
     { label: "Témoignages", value: testimonials.length, icon: Star, href: "/admin/testimonials", color: "bg-yellow-500/10 text-yellow-500" },
     { label: "Destinations", value: destinations.length, icon: MapPin, href: "/admin/destinations", color: "bg-green-500/10 text-green-500" },

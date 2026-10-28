@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   if (!sub?.endpoint || !sub?.keys?.p256dh || !sub?.keys?.auth) {
     return NextResponse.json({ error: "Invalid subscription" }, { status: 400 });
   }
-  saveSubscription(sub);
+  await saveSubscription(sub);
   return NextResponse.json({ success: true });
 }
 
@@ -19,6 +19,6 @@ export async function DELETE(req: NextRequest) {
   if (!isAdmin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const { endpoint } = await req.json();
-  if (endpoint) removeSubscription(endpoint);
+  if (endpoint) await removeSubscription(endpoint);
   return NextResponse.json({ success: true });
 }

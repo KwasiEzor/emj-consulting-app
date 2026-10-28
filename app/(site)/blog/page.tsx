@@ -2,14 +2,17 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Calendar, Clock, Search, Tag, ArrowRight } from "lucide-react";
-import { getBlogPosts } from "@/lib/data";
+import type { BlogPost } from "@/lib/types";
 
 const categories = ["Tous", "Conseils voyage", "Visa étudiant", "Immigration", "Actualités internationales"];
 
 export default function BlogPage() {
-  const posts = getBlogPosts();
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  useEffect(() => {
+    fetch("/api/blog").then(r => r.json()).then(setPosts);
+  }, []);
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("Tous");
 
