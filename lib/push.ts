@@ -3,11 +3,15 @@ import { db } from "./db";
 import { pushSubscriptions } from "./db/schema";
 import { eq } from "drizzle-orm";
 
-webpush.setVapidDetails(
-  process.env.VAPID_EMAIL || "mailto:info@emj-consulting.fr",
-  process.env.VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
-);
+function initVapid() {
+  if (process.env.VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY) {
+    webpush.setVapidDetails(
+      process.env.VAPID_EMAIL || "mailto:info@emj-consulting.fr",
+      process.env.VAPID_PUBLIC_KEY,
+      process.env.VAPID_PRIVATE_KEY
+    );
+  }
+}
 
 export type PushSubscriptionData = {
   endpoint: string;
@@ -40,6 +44,7 @@ export async function sendPushToAll(payload: {
   icon?: string;
   url?: string;
 }) {
+  initVapid();
   const subs = await readSubscriptions();
   const dead: string[] = [];
 
