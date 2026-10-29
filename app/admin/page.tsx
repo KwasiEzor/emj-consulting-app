@@ -1,24 +1,16 @@
 import { getServices, getDestinations, getTestimonials, getBlogPosts } from "@/lib/data";
 import { FileText, Star, MapPin, Briefcase, TrendingUp, Users, CalendarCheck } from "lucide-react";
 import Link from "next/link";
-import { readFileSync } from "fs";
-import path from "path";
-import type { Appointment } from "@/lib/types";
+import { listAppointments } from "@/lib/db/queries";
 
 export const dynamic = "force-dynamic";
 
-function getAppointments(): Appointment[] {
-  try {
-    return JSON.parse(readFileSync(path.join(process.cwd(), "data", "appointments.json"), "utf-8"));
-  } catch { return []; }
-}
-
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
   const posts = getBlogPosts();
   const testimonials = getTestimonials();
   const destinations = getDestinations();
   const services = getServices();
-  const appointments = getAppointments();
+  const appointments = await listAppointments().catch(() => []);
   const pendingCount = appointments.filter(a => a.status === "pending").length;
 
   const stats = [

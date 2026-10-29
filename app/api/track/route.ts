@@ -1,28 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFileSync, readFileSync } from "fs";
-import path from "path";
-import { updateDataFile } from "@/lib/github-cms";
+import { insertVisit, type AnalyticsEntry } from "@/lib/db/queries";
 
 export const dynamic = "force-dynamic";
-
-const FILE = path.join(process.cwd(), "data", "analytics.json");
-const MAX_VISITS = 2000;
-
-// Simple in-memory batch: flush to disk every 10 visits
-let pending: AnalyticsEntry[] = [];
-let flushTimer: ReturnType<typeof setTimeout> | null = null;
-
-export interface AnalyticsEntry {
-  id: string;
-  page: string;
-  country: string;
-  countryName: string;
-  city: string;
-  device: string;
-  browser: string;
-  referrer: string;
-  timestamp: string;
-}
 
 function parseDevice(ua: string): string {
   if (/mobile|android|iphone|ipad|ipod/i.test(ua)) return "mobile";
@@ -49,24 +28,6 @@ const COUNTRY_NAMES: Record<string, string> = {
   CH: "Suisse", LU: "Luxembourg", JP: "Japon", CN: "Chine",
 };
 
-function flush(data: AnalyticsEntry[]) {
-  try {
-    let existing: AnalyticsEntry[] = [];
-    try { existing = JSON.parse(readFileSync(FILE, "utf-8")); } catch { /* empty */ }
-    const merged = [...existing, ...data].slice(-MAX_VISITS);
-    writeFileSync(FILE, JSON.stringify(merged, null, 2));
-    updateDataFile("data/analytics.json", JSON.stringify(merged, null, 2)).catch(() => {});
-  } catch { /* silent */ }
-}
-
-function scheduledFlush() {
-  if (pending.length === 0) return;
-  const batch = [...pending];
-  pending = [];
-  flushTimer = null;
-  flush(batch);
-}
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -89,17 +50,7 @@ export async function POST(req: NextRequest) {
       timestamp: new Date().toISOString(),
     };
 
-    pending.push(entry);
-
-    // Flush every 10 visits or after 30s
-    if (pending.length >= 10) {
-      if (flushTimer) { clearTimeout(flushTimer); flushTimer = null; }
-      const batch = [...pending];
-      pending = [];
-      flush(batch);
-    } else if (!flushTimer) {
-      flushTimer = setTimeout(scheduledFlush, 30_000);
-    }
+    await insertVisit(entry);
 
     return NextResponse.json({ ok: true });
   } catch {

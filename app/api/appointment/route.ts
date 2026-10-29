@@ -1,20 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendAppointmentEmail } from "@/lib/email";
 import { sendPushToAll } from "@/lib/push";
-import { updateDataFile } from "@/lib/github-cms";
-import { writeFileSync, readFileSync } from "fs";
-import path from "path";
+import { insertAppointment } from "@/lib/db/queries";
 import type { Appointment } from "@/lib/types";
-
-const FILE = path.join(process.cwd(), "data", "appointments.json");
-
-function readAppointments(): Appointment[] {
-  try {
-    return JSON.parse(readFileSync(FILE, "utf-8"));
-  } catch {
-    return [];
-  }
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -42,10 +30,7 @@ export async function POST(req: NextRequest) {
       createdAt: new Date().toISOString(),
     };
 
-    const existing = readAppointments();
-    const updated = [appointment, ...existing];
-    writeFileSync(FILE, JSON.stringify(updated, null, 2));
-    updateDataFile("appointments.json", updated);
+    await insertAppointment(appointment);
 
     await Promise.allSettled([
       sendAppointmentEmail({ name, email, phone, service, date, time, notes }).catch((e) =>

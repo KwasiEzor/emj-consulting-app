@@ -1,22 +1,14 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth";
-import { readFileSync } from "fs";
-import path from "path";
-import type { AnalyticsEntry } from "@/app/api/track/route";
+import { listVisits } from "@/lib/db/queries";
 
 export const dynamic = "force-dynamic";
-
-function readVisits(): AnalyticsEntry[] {
-  try {
-    return JSON.parse(readFileSync(path.join(process.cwd(), "data", "analytics.json"), "utf-8"));
-  } catch { return []; }
-}
 
 export async function GET() {
   const { isAdmin } = await requireAdmin();
   if (!isAdmin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const visits = readVisits();
+  const visits = await listVisits().catch(() => []);
   const now = Date.now();
   const day = 86_400_000;
 
