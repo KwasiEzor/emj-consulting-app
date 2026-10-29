@@ -9,7 +9,7 @@ import { Calendar, Clock, ArrowLeft, Tag, Share2, BookOpen, CheckCircle2, ArrowR
 import { FaWhatsapp } from "@react-icons/all-files/fa/FaWhatsapp";
 import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
 import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
-import { getBlogPost, getBlogPosts } from "@/lib/data";
+import type { BlogPost } from "@/lib/types";
 
 function ReadingProgress() {
   const [progress, setProgress] = useState(0);
@@ -59,10 +59,21 @@ const defaultParagraphs = [
 ];
 
 export default function BlogPostClient({ slug }: { slug: string }) {
-  const post = getBlogPost(slug);
-  if (!post) notFound();
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [related, setRelated] = useState<BlogPost[]>([]);
 
-  const related = getBlogPosts().filter((p) => p.slug !== post.slug).slice(0, 3);
+  useEffect(() => {
+    fetch("/api/blog").then(r => r.json()).then((posts: BlogPost[]) => {
+      const found = posts.find(p => p.slug === slug);
+      if (found) {
+        setPost(found);
+        setRelated(posts.filter(p => p.slug !== slug).slice(0, 3));
+      }
+    });
+  }, [slug]);
+
+  if (!post) return null;
+
   const paragraphs = fullContent[post.slug] || defaultParagraphs;
 
   const heroRef = useRef<HTMLDivElement>(null);

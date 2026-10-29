@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Award, Target, Heart, Globe2, Users, TrendingUp, CheckCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import type { PageContent } from "@/lib/types";
-import pagesData from "@/data/pages.json";
 
 const timeline = [
   { year: "2014", title: "Fondation", desc: "EMLOR Joël crée EMJ-Consulting à Lomé avec une vision claire : rendre l'accès au voyage international accessible à tous." },
@@ -23,11 +22,12 @@ const values = [
 ];
 
 export default function AboutPage() {
-  const [pg, setPg] = useState<PageContent["about"]>(pagesData.about as PageContent["about"]);
+  const [pg, setPg] = useState<PageContent["about"] | null>(null);
   useEffect(() => {
     fetch("/api/pages").then(r => r.json()).then(d => setPg(d.about));
   }, []);
   const about = pg;
+  if (!about) return null;
   return (
     <div className="min-h-screen">
       {/* Hero */}
