@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Bell, BellOff } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -11,14 +11,19 @@ function urlBase64ToUint8Array(base64String: string): Uint8Array {
   return new Uint8Array([...raw].map((c) => c.charCodeAt(0)));
 }
 
+const noopSubscribe = () => () => {};
+
 export default function PushNotificationManager() {
-  const [supported, setSupported] = useState(false);
+  const supported = useSyncExternalStore(
+    noopSubscribe,
+    () => "serviceWorker" in navigator && "PushManager" in window,
+    () => false
+  );
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if ("serviceWorker" in navigator && "PushManager" in window) {
-      setSupported(true);
+    if (supported) {
       navigator.serviceWorker
         .register("/sw.js")
         .then(async (reg) => {
@@ -27,7 +32,7 @@ export default function PushNotificationManager() {
         })
         .catch(console.error);
     }
-  }, []);
+  }, [supported]);
 
   const subscribe = async () => {
     setLoading(true);

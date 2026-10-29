@@ -50,7 +50,14 @@ export default function AdminAppointmentsPage() {
     setLoading(false);
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    fetch("/api/admin/appointments")
+      .then((res) => res.json())
+      .then((data) => {
+        setAppointments(Array.isArray(data) ? data : []);
+        setLoading(false);
+      });
+  }, []);
 
   // SSE for real-time updates
   useEffect(() => {

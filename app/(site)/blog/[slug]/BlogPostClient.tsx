@@ -72,14 +72,14 @@ export default function BlogPostClient({ slug }: { slug: string }) {
     });
   }, [slug]);
 
-  if (!post) return null;
-
-  const paragraphs = fullContent[post.slug] || defaultParagraphs;
-
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  if (!post) return null;
+
+  const paragraphs = fullContent[post.slug] || defaultParagraphs;
 
   const shareUrl = typeof window !== "undefined" ? window.location.href : `https://emj-consulting.fr/blog/${post.slug}`;
   const shareText = encodeURIComponent(post.title);

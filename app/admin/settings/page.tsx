@@ -9,6 +9,31 @@ import { SiTiktok } from "@react-icons/all-files/si/SiTiktok";
 import { FaWhatsapp } from "@react-icons/all-files/fa/FaWhatsapp";
 import type { SiteSettings } from "@/lib/types";
 
+type FieldProps = {
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  field: string;
+  type?: string;
+  settings: SiteSettings;
+  setSettings: (s: SiteSettings) => void;
+};
+
+function Field({ label, icon: Icon, field, type = "text", settings, setSettings }: FieldProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-gray-600 dark:text-white/60 mb-1.5 flex items-center gap-1.5">
+        <Icon className="w-3.5 h-3.5" />{label}
+      </label>
+      <input
+        type={type}
+        value={(settings as unknown as Record<string, unknown>)[field] as string || ""}
+        onChange={(e) => setSettings({ ...settings, [field]: e.target.value })}
+        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 text-gray-900 dark:text-white focus:outline-none focus:border-[#D4AF37] text-sm"
+      />
+    </div>
+  );
+}
+
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
   const [saving, setSaving] = useState(false);
@@ -29,20 +54,6 @@ export default function AdminSettingsPage() {
 
   if (!settings) return <div className="text-gray-400">Chargement...</div>;
 
-  const Field = ({ label, icon: Icon, field, type = "text" }: { label: string; icon: React.ComponentType<{className?: string}>; field: string; type?: string }) => (
-    <div>
-      <label className="block text-sm font-medium text-gray-600 dark:text-white/60 mb-1.5 flex items-center gap-1.5">
-        <Icon className="w-3.5 h-3.5" />{label}
-      </label>
-      <input
-        type={type}
-        value={(settings as unknown as Record<string, unknown>)[field] as string || ""}
-        onChange={(e) => setSettings({ ...settings, [field]: e.target.value })}
-        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 text-gray-900 dark:text-white focus:outline-none focus:border-[#D4AF37] text-sm"
-      />
-    </div>
-  );
-
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
@@ -61,13 +72,13 @@ export default function AdminSettingsPage() {
         <div className="bg-white dark:bg-[#0B1F3A] rounded-2xl p-6 border border-gray-100 dark:border-white/10">
           <h2 className="font-semibold text-gray-900 dark:text-white mb-5">Informations de contact</h2>
           <div className="space-y-4">
-            <Field label="Nom du site" icon={Globe} field="siteName" />
+            <Field settings={settings} setSettings={setSettings} label="Nom du site" icon={Globe} field="siteName" />
             <ImageUpload label="Logo du site" value={settings.logo || ""} onChange={(url) => setSettings({ ...settings, logo: url })} folder="emj-consulting/branding" />
-            <Field label="Email" icon={Mail} field="email" type="email" />
-            <Field label="Téléphone" icon={Phone} field="phone" />
-            <Field label="WhatsApp" icon={FaWhatsapp} field="whatsapp" />
-            <Field label="Adresse courte" icon={MapPin} field="address" />
-            <Field label="Adresse complète" icon={MapPin} field="addressFull" />
+            <Field settings={settings} setSettings={setSettings} label="Email" icon={Mail} field="email" type="email" />
+            <Field settings={settings} setSettings={setSettings} label="Téléphone" icon={Phone} field="phone" />
+            <Field settings={settings} setSettings={setSettings} label="WhatsApp" icon={FaWhatsapp} field="whatsapp" />
+            <Field settings={settings} setSettings={setSettings} label="Adresse courte" icon={MapPin} field="address" />
+            <Field settings={settings} setSettings={setSettings} label="Adresse complète" icon={MapPin} field="addressFull" />
           </div>
         </div>
 

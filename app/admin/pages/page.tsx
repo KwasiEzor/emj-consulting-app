@@ -15,6 +15,20 @@ const TABS = [
 
 type TabKey = (typeof TABS)[number]["key"];
 
+const inputCls = "w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 text-gray-900 dark:text-white focus:outline-none focus:border-[#D4AF37] text-sm transition-colors";
+const labelCls = "block text-sm font-medium text-gray-600 dark:text-white/60 mb-1.5";
+
+const Field = ({ label, value, onChange, multiline }: { label: string; value: string; onChange: (v: string) => void; multiline?: boolean }) => (
+  <div>
+    <label className={labelCls}>{label}</label>
+    {multiline ? (
+      <textarea rows={3} value={value} onChange={(e) => onChange(e.target.value)} className={`${inputCls} resize-none`} />
+    ) : (
+      <input type="text" value={value} onChange={(e) => onChange(e.target.value)} className={inputCls} />
+    )}
+  </div>
+);
+
 export default function AdminPagesPage() {
   const [data, setData] = useState<PageContent | null>(null);
   const [tab, setTab] = useState<TabKey>("home");
@@ -44,20 +58,6 @@ export default function AdminPagesPage() {
   };
 
   if (!data) return <div className="text-gray-400 text-sm">Chargement...</div>;
-
-  const inputCls = "w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 text-gray-900 dark:text-white focus:outline-none focus:border-[#D4AF37] text-sm transition-colors";
-  const labelCls = "block text-sm font-medium text-gray-600 dark:text-white/60 mb-1.5";
-
-  const Field = ({ label, value, onChange, multiline }: { label: string; value: string; onChange: (v: string) => void; multiline?: boolean }) => (
-    <div>
-      <label className={labelCls}>{label}</label>
-      {multiline ? (
-        <textarea rows={3} value={value} onChange={(e) => onChange(e.target.value)} className={`${inputCls} resize-none`} />
-      ) : (
-        <input type="text" value={value} onChange={(e) => onChange(e.target.value)} className={inputCls} />
-      )}
-    </div>
-  );
 
   return (
     <div>
