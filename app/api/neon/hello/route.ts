@@ -3,9 +3,13 @@
  * Calls the deployed Neon Function "hello" and proxies its response.
  */
 import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/auth";
 import { getHelloFunctionUrl } from "@/lib/neon-services";
 
 export async function GET() {
+  const { isAdmin } = await requireAdmin();
+  if (!isAdmin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+
   try {
     const baseUrl = getHelloFunctionUrl();
     const res = await fetch(baseUrl, { cache: "no-store" });

@@ -5,11 +5,15 @@
  * Returns { key, url }.
  */
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/auth";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getS3Client, ASSETS_BUCKET } from "@/lib/neon-services";
 import { randomUUID } from "crypto";
 
 export async function POST(req: NextRequest) {
+  const { isAdmin } = await requireAdmin();
+  if (!isAdmin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+
   try {
     const form = await req.formData();
     const file = form.get("file") as File | null;
